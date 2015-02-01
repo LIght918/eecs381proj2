@@ -305,6 +305,8 @@ private:
     int size;
     Node *first;
     Node *last;
+
+    void deallocate_nodes();
 };
 
 // These function templates are given two iterators, usually .begin() and .end(),
@@ -369,5 +371,157 @@ void Ordered_list<T, OF>::erase(Iterator it)
 }
  
 */
+
+template<typename T, typename OF = Less_than_ref<T> >
+Ordered_list::Ordered_list()
+{
+    size = 0;
+    ordering_f = Less_than_ref<T>;
+    first = nullptr;
+    last = nullptr;
+}
+
+Ordered_list::Ordered_list(const Ordered_list& original)
+{
+    *this = original;
+}
+
+Ordered_list::Ordered_list(Ordered_list&& original)
+{
+    size = original.size;
+    ordering_f = original.ordering_f;
+    first = original.first;
+    last = original.last;
+    original.first = nullptr;
+    original.last = nullptr;
+}
+
+Ordered_list& Ordered_list::operator= (const Ordered_list& rhs)
+{
+    deallocate_nodes();
+    size = rhs.size;
+    ordering_f = rhs.ordering_f;
+    Node *clone_node = Node(rhs.first->datum, nullptr, nullptr);
+    first = clone_node;
+    if (size != 0)
+    {
+        Node *node = rhs.first->next;
+        while (node != nullptr)
+        {
+            Node *new_node = Node(node->datum, clone_node, nullptr);
+            clone_node->next = new_node;
+            clone_node = new_node;
+            node = node->next;
+        }
+
+    }
+    last = clone_node;
+}
+
+~Ordered_list::Ordered_list()
+{
+    deallocate_nodes();
+}
+
+void Ordered_list::clear()
+{
+    deallocate_nodes();
+}
+
+template <typename T>
+void Ordered_list::insert(const T& new_datum)
+{
+    T data = new_datum;
+    insert(data);
+}
+
+template <typename T>
+void Ordered_list::insert(T&& new_datum)
+{
+    size++;
+    Node *node = first;
+    if (node == nullptr)
+    {
+        Node *new_node = Node(new_datum, nullptr, nullptr);
+        first = new_node;
+        last = new_node;
+        return;
+    }
+    else if (ordering_f(new_datum, node->datum) <= 0)
+    {
+        Node *new_node = Node(new_datum, nullptr, first);
+        first = new_node;
+        node->prev = new_node;
+        return;
+    }
+    node = node->next;
+    while (node != nullptr)
+    {
+        if (ordering_f(new_datum, node->datum) <= 0)
+        {
+            Node *new_node = Node(new_datum, node->prev, node);
+            node->prev = new_node;
+            return;
+        }
+        node = node->next;
+    }
+    Node *new_node = Node(new_datum, last, nullptr);
+    last->next = new_node;
+    last = new_node;
+}
+
+template <typename T>
+Iterator Ordered_list::find(const T& probe_datum)
+{
+    Node *node = first;
+    while (node != nullptr)
+    {
+        if (ordering_f(node->datum, probe_datum) == 0)
+        {
+            return Iterator(node);
+        }
+        node = node->next;
+    }
+    return nullptr;
+}
+
+void Ordered_list::erase(Iterator it)
+{
+    size--;
+    it.node_ptr->prev->next = it.node_ptr->next;
+    it.node_ptr->next->prev = it.node_ptr->prev;
+    delete it.node_ptr;
+}
+
+template<typename OF = Less_than_ref<T> >
+void Ordered_list::swap(Ordered_list & other)
+{
+    int temp_size = size;
+    Node *temp_first = first;
+    Node *temp_last = last;
+    OF temp_ordering = ordering_f;
+    size = other.size;
+    first = other.first;
+    last = other.last;
+    ordering_f = other.ordering_f;
+    other.size = temp_size;
+    other.first = temp_first;
+    other.last = temp_last;
+    other.ordering_f = temp_ordering;
+}
+
+void Ordered_list::deallocate_nodes()
+{
+    Node *node = first;
+    while (node != nullptr)
+    {
+        Node *next = node->next;
+        delete node;
+        node = next;
+    }
+    size = 0;
+    first = nullptr;
+    last = nullptr;
+}
 
 #endif
