@@ -84,13 +84,6 @@ All Ordered_list constructors and the destructor increment/decrement g_Ordered_l
 The list Node constructors and destructor increment/decrement g_Ordered_list_Node_count.
 */
 
-/* *** NOTE: If there is a comment "fill this in" remove the comment and replace
-it with the proper code here in the header file.  
-
-Comments starting with "***" are instructions to you - remove them from your finished code.
-Remove this comment too. */
-
-
 #ifndef ORDERED_LIST_H
 #define ORDERED_LIST_H
 
@@ -168,11 +161,11 @@ public:
 
 	// Return the number of nodes in the list
 	int size() const
-		{/* fill this in */}
+		{return size;}
 
 	// Return true if the list is empty
 	bool empty() const
-		{/* fill this in */}
+		{return size == 0;}
 		
 private:
 	// Node is a nested class that is private to the Ordered_list<T, OF> class.
@@ -225,10 +218,8 @@ public:
 			// Overloaded dereferencing operators
 			// * returns a reference to the datum in the pointed-to node
 			T& operator* () const
-				{/* fill this in */}
+				{ assert(node_ptr); return node_ptr->datum; }
 			// operator-> simply returns the address of the data in the pointed-to node.
-			// *** For this operator, the compiler reapplies the -> operator with the returned pointer.
-			/* *** definition supplied here because it is a special-case of operator overloading. */
 			T* operator-> () const
 				{assert(node_ptr); return &(node_ptr->datum);}
 
@@ -236,29 +227,34 @@ public:
 			// and returns this iterator.
 			Iterator& operator++ ()	// prefix
 				{	
-					/* fill this in */
+					assert(node_ptr);
+                    node_ptr = node_ptr->next;
+                    return this;
 				}
 			// postfix ++ operator saves the current address for the pointed-to node,
 			// moves this iterator to point to the next node, and returns
-			// an interator pointing to the node at the saved address.
+			// an iterator pointing to the node at the saved address.
 			Iterator operator++ (int)	// postfix
-				{	
-					/* fill this in */
+				{
+                    assert(node_ptr);
+					Node *saved_node = node_ptr;
+                    node_ptr = node_ptr->next;
+                    return Iterator(saved_node);
 				}
 			// Iterators are equal if they point to the same node
 			bool operator== (Iterator rhs) const
-				{/* fill this in */}
+				{ return node_ptr == rhs->node_ptr; }
 			bool operator!= (Iterator rhs) const
-				{/* fill this in */}
+				{ return node_ptr != rhs->node_ptr; }
 	
-			// *** here, declare the outer Ordered_list class as a friend		
+			friend Ordered_list;
 
 		private:
-			/* *** define here a private constructor for Iterator that takes a Node* parameter.
-			Ordered_list can use this to create Iterators conveniently initialized to point to a Node.
-			It is private because the client code can't and shouldn't be using it - it isn't even supposed to
-			know about the Node objects.  */
-			/* *** you may have other private member functions, but not member variables */
+            Iterator(Node* node_ptr_)
+            {
+                node_ptr = node_ptr_;
+            }
+
 			Node* node_ptr;
 		};
 	// end of nested Iterator class declaration
@@ -266,7 +262,7 @@ public:
 	// Return an iterator pointing to the first node;
     // If the list is empty, the Iterator points to "past the end"
 	Iterator begin() const
-		{/* fill this in */}
+		{return Iterator(first);}
 	// return an iterator pointing to "past the end"
 	Iterator end() const
 		{return Iterator(nullptr);}	// same as next pointer of last node
@@ -306,7 +302,9 @@ public:
 private:
 	// member variable declaration for the ordering function object.
 	OF ordering_f;  // declares an object of OF type
-	/* *** other private member variables and functions are your choice. */
+    int size;
+    Node *first;
+    Node *last;
 };
 
 // These function templates are given two iterators, usually .begin() and .end(),
@@ -327,14 +325,16 @@ void apply(IT first, IT last, F function)
 template<typename IT, typename F, typename A>
 void apply_arg(IT first, IT last, F function, A arg)
 {
-// *** fill this in.
+    for(; first != last; ++first)
+        function(*first, arg);
 }
 
 // this function templates accept the second argument by reference - useful for streams.
 template<typename IT, typename F, typename A>
 void apply_arg_ref(IT first, IT last, F function, A& arg)
 {
-// *** fill this in.
+    for(; first != last; ++first)
+        function(*first, arg);
 }
 
 // the function must return true/false; apply the function until true is returned,
@@ -353,7 +353,10 @@ bool apply_if(IT first, IT last, F function)
 template<typename IT, typename F, typename A>
 bool apply_if_arg(IT first, IT last, F function, A arg)
 {
-// *** fill this in.
+    for(; first != last; ++first)
+        if(function(*first, arg))
+            return true;
+    return false;
 }
 
 /* *** Put your code for Ordered_list member functions here, defined outside the class declaration.

@@ -9,5 +9,3 @@ struct Error {
 	const char* msg;
 };
 
-/*  *** add any other functions or declarations here and define in Utility.cpp */
-
