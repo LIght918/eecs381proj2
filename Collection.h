@@ -59,6 +59,8 @@ public:
 private:
     Ordered_list<Record*, Less_than_ptr<Record*>()> elements;
 	String name;
+
+    void print_record_title(Record* record, std::ostream& os);
 };
 
 // Print the Collection data

@@ -37,7 +37,7 @@ bool Collection::is_member_present(Record* record_ptr) const
 // Remove the specified Record, throw exception if the record was not found.
 void Collection::remove_member(Record* record_ptr)
 {
-    Ordered_list<Record*, Less_than_ptr<Record*>()>::Iterator it = elements.find(record_ptr);
+    auto it = elements.find(record_ptr);
     if (it == nullptr)
     {
         throw Error("Record is not a member in the collection!");
@@ -45,13 +45,31 @@ void Collection::remove_member(Record* record_ptr)
     elements.erase(it);
 }
 
+void print_record_title(Record* record, std::ostream& os)
+{
+    os << "\n" << record->get_title();
+}
+
 // Write a Collections's data to a stream in save format, with endl as specified.
 void Collection::save(std::ostream& os) const
 {
-
+    os << name << " " << elements.size();
+    apply_arg(elements.begin(), elements.end(), print_record_title, os);
+    os << "\n";
 }
 
 // Print the Collection data
-std::ostream& operator<< (std::ostream& os, const Collection& collection);
+std::ostream& operator<< (std::ostream& os, const Collection& collection)
+{
+    os << "Collection " << collection.name << " contains:";
+    if (collection.empty())
+    {
+        os << " None";
+    }
+    else
+    {
+        apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, os);
+    }
+}
 
 #endif
