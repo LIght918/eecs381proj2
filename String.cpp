@@ -4,7 +4,7 @@
 #include <string.h>
 #include "String.h"
 #include <assert.h>
-#include <ctype.h>
+#include <cctype>
 #include "Utility.h"
 
 static char String::a_null_byte = '\0';	// to hold a null byte for empty string representation

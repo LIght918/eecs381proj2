@@ -4,7 +4,7 @@
 #include "p2_globals.h"
 #include <fstream>
 #include <ostream>
-#include <ctype.h>
+#include <cctype>
 #include "Record.h"
 #include "String.h"
 #include "Utility.h"
