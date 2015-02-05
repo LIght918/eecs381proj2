@@ -37,7 +37,7 @@ bool Collection::is_member_present(Record* record_ptr) const
 // Remove the specified Record, throw exception if the record was not found.
 void Collection::remove_member(Record* record_ptr)
 {
-    Ordered_list<Record*, Less_than_ptr<Record*>::Iterator it = elements.find(record_ptr);
+    Ordered_list<Record*, Less_than_ptr<Record*>()>::Iterator it = elements.find(record_ptr);
     if (it == nullptr)
     {
         throw Error("Record is not a member in the collection!");
