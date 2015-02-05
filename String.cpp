@@ -19,11 +19,11 @@ static bool String::messages_wanted = false;	// whether to output constructor/de
 void deconstruct()
 {
     total_allocation -= allocation;
-    if (data != nullptr)
+    if (data != nullptr && data != a_null_byte)
     {
         delete data;
     }
-    data = nullptr;
+    data = a_null_byte;
 }
 
 // allocates a new char * and keeps track of total_allocation
@@ -37,14 +37,14 @@ char* allocate(int n)
 void resize(int n)
 {
     assert(n > 0);
-    if (allocation == 0 && data == nullptr)
+    if (allocation == 0)
     {
         data = allocate(n + 1);
         length = 0;
         allocation = n + 1;
         return;
     }
-    assert(allocation > 0 && data != nullptr);
+    assert(allocation > 0 && length > 0);
     if (allocation < length + n + 1)
     {
         allocation = 2 * (length + n + 1);
@@ -61,14 +61,13 @@ String& copy(String& rhs)
     deconstruct();
     if (original.length > 0)
     {
-        data = allocate(original.allocation);
+        allocation = original.allocation;
+        data = allocate(allocation);
         strcpy(data, original.data);
         length = original.length;
-        allocation = original.allocation;
     }
     else
     {
-        deconstruct();
         length = 0;
         allocation = 0;
     }
@@ -86,6 +85,11 @@ String& copy(const char* rhs)
         strcpy(data, cstr_);
         length = cstrlength;
         allocation = length + 1;
+    }
+    else
+    {
+        length = 0;
+        allocation = 0;
     }
     return *this;
 }
