@@ -87,6 +87,7 @@ void Record::save(std::ostream &os) const
 std::ostream& operator<< (std::ostream& os, const Record& record)
 {
     os << record.ID << ": " << record.medium << " " << record.rating != 0 ? record.rating : 'u' << " " << record.title;
+    return os;
 }
 
 #endif

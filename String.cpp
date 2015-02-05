@@ -367,6 +367,7 @@ String String::operator+ (const String& lhs, const String& rhs)
 std::ostream& String::operator<< (std::ostream& os, const String& str)
 {
     os << str.data;
+    return os;
 }
 
 /* The input operator clears the supplied String, then starts reading the stream.

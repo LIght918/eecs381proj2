@@ -83,6 +83,7 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     {
         apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, os);
     }
+    return os;
 }
 
 #endif
