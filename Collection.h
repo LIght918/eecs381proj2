@@ -1,3 +1,6 @@
+#ifndef COLLECTION_H
+#define COLLECTION_H
+
 #include <fstream>
 #include <ostream>
 #include "p2_globals.h"
@@ -60,3 +63,5 @@ private:
 
 // Print the Collection data
 std::ostream& operator<< (std::ostream& os, const Collection& collection);
+
+#endif

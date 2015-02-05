@@ -1,3 +1,5 @@
+#ifndef UTILITY_H
+#define UTILITY_H
 
 /* Utility functions, constants, and classes used by more than one other modules */
 
@@ -9,3 +11,4 @@ struct Error {
 	const char* msg;
 };
 
+#endif

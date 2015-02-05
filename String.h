@@ -1,3 +1,6 @@
+#ifndef STRING_H
+#define STRING_H
+
 #include <istream>
 #include <ostream>
 
@@ -49,12 +52,6 @@ Note that only these functions output the messages. Other member functions may r
 in these messages being output, but only because they call a constructor, destructor, 
 or assignment operator as part of their work.
 */
-
-/* *** NOTE: If after a function header is a comment "fill this in" remove the comment and replace
-it with the proper code here in the header file.  All other functions should be defined
-in the .cpp file. 
-Comments starting with "***" are instructions to you - remove them from your finished code.
-Remove this comment too. */
 
 // Simple exception class for reporting String errors
 struct String_exception {
@@ -162,7 +159,20 @@ public:
 		{messages_wanted = messages_wanted_;}
 	
 private:
-	/* *** Except for those listed below, your choice for private members */
+	char * data = nullptr;
+    int length = 0;
+    int allocation = 0;
+
+    void deconstruct(); // deallocates data
+    char* allocate(int n); // allocates a new char * and keeps track of total_allocation
+    void resize(int n); // resizes the string to handle if the length was increased by n characters
+
+    void check_subscript(int i); // checks the subscript i and throws errors if i is out of bounds
+
+    String& copy(String& rhs); // copies the rhs into this string
+    String& copy(const char* rhs); // copies rhs into this string
+    String& move(const char* rhs); // moves rhs into this string
+    String& move(String&& rhs); // moves rhs into this string
 	
 	static char a_null_byte;	// to hold a null byte for empty string representation
 
@@ -209,3 +219,4 @@ str's allocation is expanded as needed, and it retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
 std::istream& getline(std::istream& is, String& str);
 
+#endif

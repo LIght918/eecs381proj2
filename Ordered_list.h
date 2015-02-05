@@ -1,4 +1,7 @@
-/* Ordered_list is a linked-list class template  with iterators similar to 
+#ifndef ORDERED_LIST_H
+#define ORDERED_LIST_H
+
+/* Ordered_list is a linked-list class template  with iterators similar to
 the Standard Library std::list class. Each list node contains an object of the type 
 specified in the first template parameter, T.
 
@@ -372,8 +375,8 @@ void Ordered_list<T, OF>::erase(Iterator it)
  
 */
 
-template<typename T, typename OF = Less_than_ref<T> >
-Ordered_list::Ordered_list()
+template<typename T, typename OF>
+Ordered_list<T, OF>::Ordered_list()
 {
     size = 0;
     ordering_f = Less_than_ref<T>;
@@ -381,12 +384,14 @@ Ordered_list::Ordered_list()
     last = nullptr;
 }
 
-Ordered_list::Ordered_list(const Ordered_list& original)
+template<typename T, typename OF>
+Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
 {
     *this = original;
 }
 
-Ordered_list::Ordered_list(Ordered_list&& original)
+template<typename T, typename OF>
+Ordered_list<T, OF>::Ordered_list(Ordered_list<T, OF>&& original)
 {
     size = original.size;
     ordering_f = original.ordering_f;
@@ -396,7 +401,8 @@ Ordered_list::Ordered_list(Ordered_list&& original)
     original.last = nullptr;
 }
 
-Ordered_list& Ordered_list::operator= (const Ordered_list& rhs)
+template<typename T, typename OF>
+Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& rhs)
 {
     deallocate_nodes();
     size = rhs.size;
@@ -418,25 +424,27 @@ Ordered_list& Ordered_list::operator= (const Ordered_list& rhs)
     last = clone_node;
 }
 
-~Ordered_list::Ordered_list()
+template<typename T, typename OF>
+~Ordered_list<T, OF>::Ordered_list()
 {
     deallocate_nodes();
 }
 
-void Ordered_list::clear()
+template<typename T, typename OF>
+void Ordered_list<T, OF>::clear()
 {
     deallocate_nodes();
 }
 
-template <typename T>
-void Ordered_list::insert(const T& new_datum)
+template<typename T, typename OF>
+void Ordered_list<T, OF>::insert(const T& new_datum)
 {
     T data = new_datum;
     insert(data);
 }
 
-template <typename T>
-void Ordered_list::insert(T&& new_datum)
+template<typename T, typename OF>
+void Ordered_list<T, OF>::insert(T&& new_datum)
 {
     size++;
     Node *node = first;
@@ -470,8 +478,8 @@ void Ordered_list::insert(T&& new_datum)
     last = new_node;
 }
 
-template <typename T>
-Iterator Ordered_list::find(const T& probe_datum)
+template<typename T, typename OF>
+Iterator Ordered_list<T, OF>::find(const T& probe_datum)
 {
     Node *node = first;
     while (node != nullptr)
@@ -485,7 +493,8 @@ Iterator Ordered_list::find(const T& probe_datum)
     return nullptr;
 }
 
-void Ordered_list::erase(Iterator it)
+template<typename T, typename OF>
+void Ordered_list<T, OF>::erase(Iterator it)
 {
     size--;
     it.node_ptr->prev->next = it.node_ptr->next;
@@ -493,8 +502,8 @@ void Ordered_list::erase(Iterator it)
     delete it.node_ptr;
 }
 
-template<typename OF = Less_than_ref<T> >
-void Ordered_list::swap(Ordered_list & other)
+template<typename T, typename OF>
+void Ordered_list<T, OF>::swap(Ordered_list & other)
 {
     int temp_size = size;
     Node *temp_first = first;
@@ -510,7 +519,8 @@ void Ordered_list::swap(Ordered_list & other)
     other.ordering_f = temp_ordering;
 }
 
-void Ordered_list::deallocate_nodes()
+template<typename T, typename OF>
+void Ordered_list<T, OF>::deallocate_nodes()
 {
     Node *node = first;
     while (node != nullptr)
