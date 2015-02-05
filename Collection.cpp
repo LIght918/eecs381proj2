@@ -17,7 +17,20 @@
     String data input is read directly into the member variable. */
 Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_ptr<Record*>()>& library)
 {
-
+    int num;
+    if (!(is >> name >> num))
+    {
+        throw_file_error();
+    }
+    for (int i = 0; i < num; i++)
+    {
+        String title;
+        if (!(is >> title))
+        {
+            throw_file_error();
+        }
+        elements.insert(*(library.find(&Record(title))));
+    }
 }
 
 // Add the Record, throw exception if there is already a Record with the same title.
