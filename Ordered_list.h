@@ -310,6 +310,7 @@ private:
     Node *last;
 
     void deallocate_nodes();
+    Ordered_list& copy(Ordered_list &original);
 };
 
 // These function templates are given two iterators, usually .begin() and .end(),
@@ -385,26 +386,9 @@ Ordered_list<T, OF>::Ordered_list()
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
+Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
 {
-    *this = original;
-}
-
-template<typename T, typename OF>
-Ordered_list<T, OF>::Ordered_list(Ordered_list<T, OF>&& original)
-{
-    size = original.size;
-    ordering_f = original.ordering_f;
-    first = original.first;
-    last = original.last;
-    original.first = nullptr;
-    original.last = nullptr;
-}
-
-template<typename T, typename OF>
-Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& rhs)
-{
-    deallocate_nodes();
+    clear();
     size = rhs.size;
     ordering_f = rhs.ordering_f;
     Node *clone_node = Node(rhs.first->datum, nullptr, nullptr);
@@ -419,15 +403,32 @@ Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& 
             clone_node = new_node;
             node = node->next;
         }
-
     }
     last = clone_node;
 }
 
 template<typename T, typename OF>
+Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
+{
+    copy(original);
+}
+
+template<typename T, typename OF>
+Ordered_list<T, OF>::Ordered_list(Ordered_list<T, OF>&& original)
+{
+    swap(original);
+}
+
+template<typename T, typename OF>
+Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& rhs)
+{
+    copy(rhs);
+}
+
+template<typename T, typename OF>
 ~Ordered_list<T, OF>::Ordered_list()
 {
-    deallocate_nodes();
+    clear();
 }
 
 template<typename T, typename OF>

@@ -5,6 +5,7 @@
 #include "String.h"
 #include <assert.h>
 #include <ctype.h>
+#include "Utility.h"
 
 static char String::a_null_byte = '\0';	// to hold a null byte for empty string representation
 
@@ -102,13 +103,7 @@ String& move(const char* rhs)
 // moves rhs into this string
 String& move(String&& rhs)
 {
-    deconstruct();
-    data = original.data;
-    length = original.length;
-    allocation = original.allocation;
-    original.data = nullptr;
-    original.length = 0;
-    original.allocation = 0;
+    swap(rhs);
     return *this;
 }
 
@@ -199,11 +194,7 @@ int String::get_allocation() const
 // checks the subscript i and throws errors if i is out of bounds
 void check_subscript(int i)
 {
-    if (i < 0)
-    {
-        throw String_exception("Substring bounds invalid");
-    }
-    if (i >= length)
+    if (i < 0 || i >= length)
     {
         throw String_exception("Subscript out of range");
     }
@@ -230,6 +221,10 @@ If both i = size and len = 0, the input is valid and the result is an empty stri
 Throw exception if the input is invalid. */
 String String::substring(int i, int len) const
 {
+    if (!(i >= 0 && len >= 0 && i <= size && (i + len) <= size))
+    {
+        throw String_exception("Substring bounds invalid");
+    }
     char sub[len + 1];
     strcpy(sub, data + i);
     return String(sub);
@@ -388,7 +383,10 @@ std::istream& String::operator>> (std::istream& is, String& str)
     while (leading || !trailing)
     {
         char next;
-        is >> next;
+        if (!(is >> next))
+        {
+            throw_file_error();
+        }
         if (!isspace(next))
         {
             str += next;
@@ -418,7 +416,10 @@ std::istream& String::getline(std::istream& is, String& str)
     while (true)
     {
         char next;
-        is >> next;
+        if (!(is >> next))
+        {
+            throw_file_error();
+        }
         if (next != '\n')
         {
             str += next;

@@ -11,4 +11,6 @@ struct Error {
 	const char* msg;
 };
 
+void throw_file_error();
+
 #endif
