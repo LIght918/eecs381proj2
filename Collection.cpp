@@ -64,12 +64,7 @@ void Collection::remove_member(Record* record_ptr)
     elements.erase(it);
 }
 
-void print_record_title(Record* record, std::ostream& os)
-{
-    os << "\n" << record->get_title();
-}
-
-// Write a Collections's data to a stream in save format, with endl as specified.
+// Write a Collection's data to a stream in save format, with endl as specified.
 void Collection::save(std::ostream& os) const
 {
     os << name << " " << elements.size();
