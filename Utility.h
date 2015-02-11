@@ -22,6 +22,4 @@ String& title_read();
 
 String& parse_title(String& title_string);
 
-void print_record_title(Record* record, std::ostream& os);
-
 #endif

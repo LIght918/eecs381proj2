@@ -48,8 +48,3 @@ String& parse_title(String& title_string)
     }
     return title;
 }
-
-void print_record_title(Record* record, std::ostream& os)
-{
-    os << "\n" << record->get_title();
-}

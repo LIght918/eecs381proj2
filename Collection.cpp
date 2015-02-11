@@ -68,7 +68,10 @@ void Collection::remove_member(Record* record_ptr)
 void Collection::save(std::ostream& os) const
 {
     os << name << " " << elements.size();
-    apply_arg(elements.begin(), elements.end(), print_record_title, os);
+    for (auto it = elements.begin(); it != elements.end(); it++)
+    {
+        os << "\n" << (*it)->get_title();
+    }
     os << "\n";
 }
 
