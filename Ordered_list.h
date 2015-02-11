@@ -378,12 +378,12 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(Ordered_list<T, OF>& original) noe
     length = original.length;
     if (length != 0)
     {
-        Node *clone_node = Node(original.first->datum, nullptr, nullptr);
+        Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
         first = clone_node;
         Node *node = original.first->next;
         while (node != nullptr)
         {
-            Node *new_node = Node(node->datum, clone_node, nullptr);
+            Node *new_node = new Node(node->datum, clone_node, nullptr);
             clone_node->next = new_node;
             clone_node = new_node;
             node = node->next;
@@ -445,14 +445,14 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
     Node *node = first;
     if (node == nullptr)
     {
-        Node *new_node = Node(new_datum, nullptr, nullptr);
+        Node *new_node = new Node(new_datum, nullptr, nullptr);
         first = new_node;
         last = new_node;
         return;
     }
     else if (ordering_f(new_datum, node->datum) <= 0)
     {
-        Node *new_node = Node(new_datum, nullptr, first);
+        Node *new_node = new Node(new_datum, nullptr, first);
         first = new_node;
         node->prev = new_node;
         return;
@@ -462,13 +462,13 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
     {
         if (ordering_f(new_datum, node->datum) <= 0)
         {
-            Node *new_node = Node(new_datum, node->prev, node);
+            Node *new_node = new Node(new_datum, node->prev, node);
             node->prev = new_node;
             return;
         }
         node = node->next;
     }
-    Node *new_node = Node(new_datum, last, nullptr);
+    Node *new_node = new Node(new_datum, last, nullptr);
     last->next = new_node;
     last = new_node;
 }
