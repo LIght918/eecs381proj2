@@ -24,12 +24,19 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     }
     for (int i = 0; i < num; i++)
     {
-        String title;
-        if (!(is >> title))
+        try
+        {
+            String title = title_read();
+            auto record_ptr = library.find(&Record(title));
+            if (record_ptr == nullptr)
+            {
+                throw_file_error();
+            }
+            elements.insert(*record_it);
+        } catch (String_exception)
         {
             throw_file_error();
         }
-        elements.insert(*(library.find(&Record(title))));
     }
 }
 

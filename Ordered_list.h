@@ -365,17 +365,6 @@ bool apply_if_arg(IT first, IT last, F function, A arg)
     return false;
 }
 
-/* *** Put your code for Ordered_list member functions here, defined outside the class declaration.
-For example:
-
-template<typename T, typename OF>
-void Ordered_list<T, OF>::erase(Iterator it)
-{
-	your code here
-}
- 
-*/
-
 template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list()
 {
@@ -383,19 +372,20 @@ Ordered_list<T, OF>::Ordered_list()
     ordering_f = Less_than_ref<T>;
     first = nullptr;
     last = nullptr;
+    g_Ordered_list_count++;
 }
 
 template<typename T, typename OF>
 Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
 {
     clear();
-    size = rhs.size;
-    ordering_f = rhs.ordering_f;
-    Node *clone_node = Node(rhs.first->datum, nullptr, nullptr);
-    first = clone_node;
+    size = original.size;
+    ordering_f = original.ordering_f;
     if (size != 0)
     {
-        Node *node = rhs.first->next;
+        Node *clone_node = Node(original.first->datum, nullptr, nullptr);
+        first = clone_node;
+        Node *node = original.first->next;
         while (node != nullptr)
         {
             Node *new_node = Node(node->datum, clone_node, nullptr);
@@ -403,20 +393,22 @@ Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
             clone_node = new_node;
             node = node->next;
         }
+        last = clone_node;
     }
-    last = clone_node;
 }
 
 template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
 {
     copy(original);
+    g_Ordered_list_count++;
 }
 
 template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list(Ordered_list<T, OF>&& original)
 {
     swap(original);
+    g_Ordered_list_count++;
 }
 
 template<typename T, typename OF>
@@ -429,6 +421,7 @@ template<typename T, typename OF>
 ~Ordered_list<T, OF>::Ordered_list()
 {
     clear();
+    g_Ordered_list_count--;
 }
 
 template<typename T, typename OF>

@@ -43,34 +43,31 @@ Record::Record(int ID_)
 // record ID if the saved record ID is larger than the static member variable value.
 Record::Record(std::ifstream &is)
 {
-    if (!(is >> ID >> medium >> rating))
+    try
     {
-        throw_file_error();
-    }
-    if (ID > ID_counter)
-    {
-        ID_counter = ID;
-    }
-    getline(is, title);
-    int first_char = -1;
-    for (int i = 0; i < title.size(); i++)
-    {
-        if (!isspace(title[i]))
+        if (!(is >> ID >> medium >> rating))
         {
-            first_char = i;
-            break;
+            throw_file_error();
         }
+        if (ID > ID_counter)
+        {
+            ID_counter = ID;
+        }
+        title = title_read();
     }
-    if (first_char == -1)
+    catch (String_exception)
     {
         throw_file_error();
     }
-    title = title.substring(first_char, title.size() - first_char);
 }
 
 // if the rating is not between 1 and 5 inclusive, an exception is thrown
 void Record::set_rating(int rating_)
 {
+    if (rating_ < 1 || rating_ > 5)
+    {
+        throw Error("Rating is out of range!");
+    }
     rating = rating_;
 }
 
@@ -86,7 +83,7 @@ void Record::save(std::ostream &os) const
 // If the rating is zero, a 'u' is printed instead of the rating.
 std::ostream& operator<< (std::ostream& os, const Record& record)
 {
-    os << record.ID << ": " << record.medium << " " << record.rating != 0 ? record.rating : 'u' << " " << record.title;
+    os << record.ID << ": " << record.medium << " " << (record.rating != 0 ? record.rating : 'u') << " " << record.title;
     return os;
 }
 

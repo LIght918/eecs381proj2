@@ -87,13 +87,13 @@ public:
 	// Accesssors
 	// Return a pointer to the internal C-string
 	const char* c_str() const	
-		{/*** fill this in */}
+		{return data;}
 	// Return size (length) of internal C-string in this String
 	int size() const
-		{/*** fill this in */}
+		{return length;}
 	// Return current allocation for this String
 	int get_allocation() const
-		{/*** fill this in */}
+		{return allocation;}
 		
 	// Return a reference to character i in the string.
 	// Throw exception if 0 <= i < size is false.

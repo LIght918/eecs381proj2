@@ -277,6 +277,7 @@ void String::insert_before(int i, const String& src)
     resize(src.length);
     memmove(data + i + src.length, length - i);
     strcpy(data + i, src.data, src.length);
+    length += src.length;
 }
 
 /* These concatenation operators add the rhs string data to the lhs object.
@@ -292,13 +293,16 @@ String& String::operator += (char rhs)
 }
 String& String::operator += (const char* rhs)
 {
-    resize(strlen(rhs));
+    int added_size = strlen(rhs);
+    resize(added_size);
     strcpy(data + length, rhs);
+    length += added_size;
 }
 String& String::operator += (const String& rhs)
 {
     resize(rhs.length);
     strcpy(data + length, rhs.data);
+    length += rhs.length;
 }
 
 /* Swap the contents of this String with another one.
@@ -390,7 +394,7 @@ std::istream& String::operator>> (std::istream& is, String& str)
         char next;
         if (!(is >> next))
         {
-            throw_file_error();
+            throw String_exception();
         }
         if (!isspace(next))
         {
@@ -423,13 +427,11 @@ std::istream& String::getline(std::istream& is, String& str)
         char next;
         if (!(is >> next))
         {
-            throw_file_error();
+            throw String_exception();
         }
         if (next != '\n')
         {
             str += next;
-            leading = false;
-            trailing = false;
         }
         else
         {
