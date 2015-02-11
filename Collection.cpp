@@ -26,8 +26,8 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
         {
             String title = title_read();
             Record temp_record(title);
-            auto record_ptr = library.find(&temp_record);
-            if (record_ptr == library.end())
+            auto record_it = library.find(&temp_record);
+            if (record_it == library.end())
             {
                 throw_file_error();
             }
@@ -64,16 +64,16 @@ void Collection::remove_member(Record* record_ptr)
     elements.erase(it);
 }
 
-void print_record_title(Record* record, std::ostream& os)
+void print_record_title(Record* record, std::ostream* os)
 {
-    os << "\n" << record->get_title();
+    *os << "\n" << record->get_title();
 }
 
 // Write a Collections's data to a stream in save format, with endl as specified.
 void Collection::save(std::ostream& os) const
 {
     os << name << " " << elements.size();
-    apply_arg(elements.begin(), elements.end(), print_record_title, os);
+    apply_arg(elements.begin(), elements.end(), print_record_title, &os);
     os << "\n";
 }
 
