@@ -85,7 +85,7 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     }
     else
     {
-        for (auto it = elements.begin(); it != elements.end(); it++)
+        for (auto it = collection.elements.begin(); it != collection.elements.end(); it++)
         {
             os << "\n" << (*it)->get_title();
         }
