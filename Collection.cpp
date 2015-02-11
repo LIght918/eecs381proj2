@@ -87,7 +87,7 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     }
     else
     {
-        apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, os);
+        apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, &os);
     }
     return os;
 }
