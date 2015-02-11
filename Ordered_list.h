@@ -229,7 +229,7 @@ public:
 				{	
 					assert(node_ptr);
                     node_ptr = node_ptr->next;
-                    return this;
+                    return *this;
 				}
 			// postfix ++ operator saves the current address for the pointed-to node,
 			// moves this iterator to point to the next node, and returns
@@ -410,12 +410,14 @@ template<typename T, typename OF>
 Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& rhs)
 {
     copy(rhs);
+    return *this;
 }
 
 template<typename T, typename OF>
 Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (Ordered_list<T, OF>&& rhs) noexcept
 {
     swap(rhs);
+    return *this;
 }
 
 template<typename T, typename OF>
