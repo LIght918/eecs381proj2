@@ -1,5 +1,5 @@
-#ifndef STRING_H
-#define STRING_H
+#ifndef STRING_FAKE_H
+#define STRING_FAKE_H
 
 #include <istream>
 #include <ostream>
