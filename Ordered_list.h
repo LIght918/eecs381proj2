@@ -307,7 +307,7 @@ private:
     Node *last;
 
     void deallocate_nodes();
-    Ordered_list& copy(Ordered_list &original);
+    Ordered_list& copy(Ordered_list& original) noexcept;
 };
 
 // These function templates are given two iterators, usually .begin() and .end(),
@@ -372,7 +372,7 @@ Ordered_list<T, OF>::Ordered_list()
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
+Ordered_list<T, OF>& Ordered_list<T,OF>::copy(Ordered_list<T, OF>& original) noexcept
 {
     Ordered_list<T, OF>::clear();
     length = original.length;
@@ -393,7 +393,7 @@ Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
+Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original) noexcept
 {
     copy(original);
     g_Ordered_list_count++;
@@ -407,7 +407,7 @@ Ordered_list<T, OF>::Ordered_list(Ordered_list<T, OF>&& original)
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& rhs)
+Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& rhs) noexcept
 {
     copy(rhs);
 }
@@ -420,7 +420,7 @@ template<typename T, typename OF>
 }
 
 template<typename T, typename OF>
-void Ordered_list<T, OF>::clear()
+void Ordered_list<T, OF>::clear() noexcept
 {
     deallocate_nodes();
 }
@@ -468,7 +468,7 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
 }
 
 template<typename T, typename OF>
-Iterator Ordered_list<T, OF>::find(const T& probe_datum)
+Iterator Ordered_list<T, OF>::find(const T& probe_datum) noexcept
 {
     Node *node = first;
     while (node != nullptr)
@@ -483,7 +483,7 @@ Iterator Ordered_list<T, OF>::find(const T& probe_datum)
 }
 
 template<typename T, typename OF>
-void Ordered_list<T, OF>::erase(Iterator it)
+void Ordered_list<T, OF>::erase(Iterator it) noexcept
 {
     length--;
     it.node_ptr->prev->next = it.node_ptr->next;
@@ -492,7 +492,7 @@ void Ordered_list<T, OF>::erase(Iterator it)
 }
 
 template<typename T, typename OF>
-void Ordered_list<T, OF>::swap(Ordered_list & other)
+void Ordered_list<T, OF>::swap(Ordered_list & other) noexcept
 {
     int temp_length = length;
     Node *temp_first = first;
