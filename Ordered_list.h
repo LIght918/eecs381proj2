@@ -307,7 +307,7 @@ private:
     Node *last;
 
     void deallocate_nodes();
-    Ordered_list& copy(Ordered_list& original) noexcept;
+    Ordered_list& copy(const Ordered_list& original) noexcept;
 };
 
 // These function templates are given two iterators, usually .begin() and .end(),
@@ -372,7 +372,7 @@ Ordered_list<T, OF>::Ordered_list()
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>& Ordered_list<T,OF>::copy(Ordered_list<T, OF>& original) noexcept
+Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& original) noexcept
 {
     clear();
     length = original.length;
