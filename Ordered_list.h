@@ -243,7 +243,7 @@ public:
 				}
 			// Iterators are equal if they point to the same node
 			bool operator== (Iterator rhs) const
-				{ return !(ordering_f(node_ptr->datum, rhs.node_ptr->datum)) && !(ordering_f(rhs.node_ptr->datum, node_ptr->datum)); }
+				{ return node_ptr == rhs.node_ptr; }
 			bool operator!= (Iterator rhs) const
 				{ return !(*this == rhs); }
 	
@@ -390,6 +390,7 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
         }
         last = clone_node;
     }
+    return *this;
 }
 
 template<typename T, typename OF>
