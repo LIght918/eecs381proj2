@@ -1,5 +1,6 @@
 #include <iostream>
 #include <fstream>
+#include <limits>
 #include "String.h"
 #include "Ordered_list.h"
 #include "Record.h"
