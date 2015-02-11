@@ -55,7 +55,7 @@ Record::Record(std::ifstream &is)
         }
         title = title_read();
     }
-    catch (String_exception)
+    catch (String_exception& e)
     {
         throw_file_error();
     }

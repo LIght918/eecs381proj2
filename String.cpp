@@ -21,7 +21,7 @@ void deconstruct()
     total_allocation -= allocation;
     if (data != nullptr && data != a_null_byte)
     {
-        delete data;
+        delete[] data;
     }
     data = a_null_byte;
 }

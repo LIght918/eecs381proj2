@@ -33,7 +33,7 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
                 throw_file_error();
             }
             elements.insert(*record_it);
-        } catch (String_exception)
+        } catch (String_exception& e)
         {
             throw_file_error();
         }

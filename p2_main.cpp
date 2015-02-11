@@ -246,6 +246,7 @@ int main()
                             {
                                 throw Error("Cannot clear all records unless all collections are empty!");
                             }
+                            Record::reset_ID_counter();
                             clear_libraries(library_title, library_id);
                             cout << "All records deleted";
                             break;
@@ -258,6 +259,7 @@ int main()
                         }
                         case 'A': /* clear all */
                         {
+                            Record::reset_ID_counter();
                             clear_libraries(library_title, library_id);
                             clear_catalog(catalog);
                             cout << "All data deleted";
@@ -328,26 +330,36 @@ int main()
                             Ordered_list<*Collection> new_catalog;
                             Ordered_list<*Record> new_library_title;
                             Ordered_list<*Record, record_id_comp> new_library_id;
-                            while (num > 0)
+                            try
                             {
-                                Record *record_ptr = new Record(file);
-                                new_library_title.insert(record_ptr);
-                                new_library_id.insert(record_ptr);
-                                num--;
+                                Record::save_ID_counter();
+                                Record::reset_ID_counter();
+                                while (num > 0)
+                                {
+                                    Record *record_ptr = new Record(file);
+                                    new_library_title.insert(record_ptr);
+                                    new_library_id.insert(record_ptr);
+                                    num--;
+                                }
+                                file >> num;
+                                while (num > 0)
+                                {
+                                    Collection *collection_ptr = new Collection(file);
+                                    new_catalog.insert(collection_ptr);
+                                    num--;
+                                }
+                                clear_libraries(library_title, library_id);
+                                clear_catalog(catalog);
+                                library_title = new_library_title;
+                                library_id = new_library_id;
+                                catalog = new_catalog;
+                                cout << "Data loaded";
                             }
-                            file >> num;
-                            while (num > 0)
+                            catch (Error& e)
                             {
-                                Collection *collection_ptr = new Collection(file);
-                                new_catalog.insert(collection_ptr);
-                                num--;
+                                Record::restore_ID_counter();
+                                throw e;
                             }
-                            clear_libraries(library_title, library_id);
-                            clear_catalog(catalog);
-                            library_title = new_library_title;
-                            library_id = new_library_id;
-                            catalog = new_catalog;
-                            cout << "Data loaded";
                             break;
                         }
                         default:
@@ -381,7 +393,7 @@ int main()
                     break;
                 }
             }
-        } catch (Error e)
+        } catch (Error& e)
         {
             cout << e.msg << "\n";
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

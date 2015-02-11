@@ -30,7 +30,7 @@ String& title_read()
             throw String_exception("");
         }
         return title;
-    } catch (String_exception)
+    } catch (String_exception& e)
     {
         throw Error("Could not read a title!");
     }
