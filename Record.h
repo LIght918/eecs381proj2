@@ -69,7 +69,7 @@ public:
     friend std::ostream& operator<< (std::ostream& os, const Record& record);
 
 private:
-    static int ID_counter = 0; // must be initialized to zero.
+    static int ID_counter; // must be initialized to zero.
     static int ID_backup;
     String title;
     String medium;
