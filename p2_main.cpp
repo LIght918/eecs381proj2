@@ -414,7 +414,7 @@ Record* read_title_get_record(Ordered_list<Record*, Less_than_ptr<Record*>>& lib
     return *read_title_get_iter(library_title);
 }
 
-Ordered_list<*Record>::Iterator read_title_get_iter(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title)
+Ordered_list<Record*, Less_than_ptr<Record*>>::Iterator read_title_get_iter(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title)
 {
     String title = title_read();
     Record temp_record(title);
