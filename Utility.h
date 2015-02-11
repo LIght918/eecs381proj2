@@ -2,6 +2,7 @@
 #define UTILITY_H
 
 #include "String.h"
+#include "Record.h"
 
 /* Utility functions, constants, and classes used by more than one other modules */
 

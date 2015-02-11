@@ -1,5 +1,6 @@
 #include "Utility.h"
 #include "String.h"
+#include "Record.h"
 #include <sstream>
 #include <iostream>
 
