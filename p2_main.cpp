@@ -217,7 +217,7 @@ int main()
                         }
                         case 'c': /* delete collection */
                         {
-                            auto collection_iter = read_name_get_collection(catalog);
+                            auto collection_iter = read_name_get_iter(catalog);
                             Collection *collection_ptr = *collection_iter;
                             catalog.erase(collection_iter);
                             cout << "Collection " << collection_ptr->get_name() << " deleted";
