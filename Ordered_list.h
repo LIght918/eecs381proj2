@@ -87,9 +87,6 @@ All Ordered_list constructors and the destructor increment/decrement g_Ordered_l
 The list Node constructors and destructor increment/decrement g_Ordered_list_Node_count.
 */
 
-#ifndef ORDERED_LIST_H
-#define ORDERED_LIST_H
-
 #include "p2_globals.h"
 #include <utility>
 #include <cassert>
