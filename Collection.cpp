@@ -25,8 +25,9 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
         try
         {
             String title = title_read();
-            auto record_ptr = library.find(&Record(title));
-            if (record_ptr == nullptr)
+            Record temp_record(title);
+            auto record_ptr = library.find(&temp_record);
+            if (record_ptr == library.end())
             {
                 throw_file_error();
             }
@@ -50,13 +51,13 @@ void Collection::add_member(Record* record_ptr)
 // Return true if the record is present, false if not.
 bool Collection::is_member_present(Record* record_ptr) const
 {
-    return elements.find(record_ptr) != nullptr;
+    return elements.find(record_ptr) != elements.end();
 }
 // Remove the specified Record, throw exception if the record was not found.
 void Collection::remove_member(Record* record_ptr)
 {
     auto it = elements.find(record_ptr);
-    if (it == nullptr)
+    if (it == elements.end())
     {
         throw Error("Record is not a member in the collection!");
     }
