@@ -158,7 +158,7 @@ int main()
                             cin >> medium;
                             title = title_read();
                             Record temp_record(title);
-                            if (library_title.find(&temp_record) != nullptr)
+                            if (library_title.find(&temp_record) != library_title.end())
                             {
                                 throw Error("Library already has a record with this title!");
                             }
@@ -173,7 +173,7 @@ int main()
                             String name;
                             cin >> name;
                             Collection temp_collection(name);
-                            if (catalog.find(&temp_collection) != nullptr)
+                            if (catalog.find(&temp_collection) != catalog.end())
                             {
                                 throw Error("Catalog already has a collection with this name!");
                             }
