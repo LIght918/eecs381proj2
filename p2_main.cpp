@@ -9,21 +9,23 @@
 
 using namespace std;
 
-bool record_id_comp(const Record *lhs, const Record *rhs) const { return lhs->get_ID() < rhs->get_ID(); }
+struct record_id_comp {
+    bool operator() (const Record *lhs, const Record *rhs) const { return lhs->get_ID() < rhs->get_ID(); }
+};
 
 void throw_unrecognized_command();
 
-Record* read_title_get_record(Ordered_list<*Record>& library_title);
-Ordered_list<*Record>::Iterator read_title_get_iter(Ordered_list<*Record>& library_title);
+Record* read_title_get_record(Ordered_list<*Record, Less_than_ptr<*Record>>& library_title);
+Ordered_list<*Record, Less_than_ptr<*Record>>::Iterator read_title_get_iter(Ordered_list<*Record, Less_than_ptr<*Record>>& library_title);
 
 Record* read_id_get_record(Ordered_list<*Record, record_id_comp>& library_id);
 Ordered_list<*Record, record_id_comp>::Iterator read_id_get_iter(Ordered_list<*Record, record_id_comp>& library_id);
 
-Collection* read_name_get_collection(Ordered_list<*Collection>& catalog);
-Ordered_list<*Collection>::Iterator read_name_get_iter(Ordered_list<*Collection>& catalog);
+Collection* read_name_get_collection(Ordered_list<*Collection, Less_than_ptr<*Collection>>& catalog);
+Ordered_list<*Collection, Less_than_ptr<*Collection>>::Iterator read_name_get_iter(Ordered_list<*Collection, Less_than_ptr<*Collection>>& catalog);
 
-void clear_libraries(Ordered_list<*Record> library_title, Ordered_list<*Record, record_id_comp> library_id);
-void clear_catalog(Ordered_list<*Collection> catalog);
+void clear_libraries(Ordered_list<*Record, Less_than_ptr<*Record>> library_title, Ordered_list<*Record, record_id_comp> library_id);
+void clear_catalog(Ordered_list<*Collection, Less_than_ptr<*Collection>> catalog);
 
 bool check_collection_not_empty(Collection *collection);
 bool check_record_in_collection(Collection *collection, Record *record);
@@ -33,8 +35,8 @@ void print_collection(Collection* collection, std::ostream& os);
 
 int main()
 {
-    Ordered_list<*Collection> catalog;
-    Ordered_list<*Record> library_title;
+    Ordered_list<*Collection, Less_than_ptr<*Collection>> catalog;
+    Ordered_list<*Record, Less_than_ptr<*Record>> library_title;
     Ordered_list<*Record, record_id_comp> library_id;
     while (true)
     {
@@ -324,8 +326,8 @@ int main()
                             }
                             int num;
                             file >> num;
-                            Ordered_list<*Collection> new_catalog;
-                            Ordered_list<*Record> new_library_title;
+                            Ordered_list<*Collection, Less_than_ptr<*Collection>> new_catalog;
+                            Ordered_list<*Record, Less_than_ptr<*Record>> new_library_title;
                             Ordered_list<*Record, record_id_comp> new_library_id;
                             try
                             {
@@ -404,12 +406,12 @@ void throw_unrecognized_command()
     throw Error("Unrecognized command!");
 }
 
-Record* read_title_get_record(Ordered_list<*Record>& library_title)
+Record* read_title_get_record(Ordered_list<*Record, Less_than_ptr<*Record>>& library_title)
 {
     return *read_title_get_iter(library_title);
 }
 
-Ordered_list<*Record>::Iterator read_title_get_iter(Ordered_list<*Record>& library_title)
+Ordered_list<*Record>::Iterator read_title_get_iter(Ordered_list<*Record, Less_than_ptr<*Record>>& library_title)
 {
     String title = title_read();
     auto record_iter = library_title.find(&Record(title));
@@ -436,12 +438,12 @@ Ordered_list<*Record, record_id_comp>::Iterator read_id_get_iter(Ordered_list<*R
     return record_iter;
 }
 
-Collection* read_name_get_collection(Ordered_list<*Collection>& catalog)
+Collection* read_name_get_collection(Ordered_list<*Collection, Less_than_ptr<*Collection>>& catalog)
 {
     return *read_name_get_iter(catalog);
 }
 
-Ordered_list<*Collection>::Iterator read_name_get_iter(Ordered_list<*Collection>& catalog)
+Ordered_list<*Collection, Less_than_ptr<*Collection>>::Iterator read_name_get_iter(Ordered_list<*Collection, Less_than_ptr<*Collection>>& catalog)
 {
     String name;
     cin >> name;
@@ -453,7 +455,7 @@ Ordered_list<*Collection>::Iterator read_name_get_iter(Ordered_list<*Collection>
     return collection_iter;
 }
 
-void clear_libraries(Ordered_list<*Record> library_title, Ordered_list<*Record, record_id_comp> library_id)
+void clear_libraries(Ordered_list<*Record, Less_than_ptr<*Record>> library_title, Ordered_list<*Record, record_id_comp> library_id)
 {
     auto title_iter = library_title.begin();
     while (title_iter != nullptr)
@@ -471,7 +473,7 @@ void clear_libraries(Ordered_list<*Record> library_title, Ordered_list<*Record, 
     library_id.clear();
 }
 
-void clear_catalog(Ordered_list<*Collection> catalog)
+void clear_catalog(Ordered_list<*Collection, Less_than_ptr<*Collection>> catalog)
 {
     auto catalog_iter = catalog.begin();
     while (catalog_iter != nullptr)

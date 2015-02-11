@@ -121,7 +121,7 @@ struct Less_than_ptr {
 
 // T is the type of the objects in the list - the data item in the list node
 // OF is the ordering function object type, defaulting to Less_than_ref for T
-template<typename T, typename OF = Less_than_ref<T> >
+template<typename T, typename OF = Less_than_ref<T>>
 class Ordered_list {
 		
 public:
@@ -302,7 +302,7 @@ public:
 private:
 	// member variable declaration for the ordering function object.
 	OF ordering_f;  // declares an object of OF type
-    int size;
+    int length;
     Node *first;
     Node *last;
 
@@ -366,7 +366,7 @@ template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list()
 {
     size = 0;
-    ordering_f = Less_than_ref<T>;
+    ordering_f = Less_than_ref<T>();
     first = nullptr;
     last = nullptr;
     g_Ordered_list_count++;
