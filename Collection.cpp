@@ -3,6 +3,7 @@
 #include "p2_globals.h"
 #include "Utility.h"
 #include "Record.h"
+#include "Collection.h"
 #include "Ordered_list.h"
 #include "String.h"
 
