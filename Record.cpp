@@ -1,6 +1,7 @@
 #include "p2_globals.h"
 #include <fstream>
 #include <iostream>
+#include <ostream>
 #include <cctype>
 #include "Record.h"
 #include "String.h"
@@ -8,8 +9,8 @@
 
 const int rating_min = 1;
 const int rating_max = 5;
-static int Record::ID_counter = 0;
-static int Record::ID_backup = 0;
+Record::ID_counter = 0;
+Record::ID_backup = 0;
 
 // Create a Record object, giving it a unique ID number by first incrementing
 // a static member variable then using its value as the ID number. The rating is set to 0.
