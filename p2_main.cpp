@@ -30,8 +30,8 @@ void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>> catalog
 bool check_collection_not_empty(Collection *collection);
 bool check_record_in_collection(Collection *collection, Record *record);
 
-void print_record(Record* record, std::ostream& os);
-void print_collection(Collection* collection, std::ostream& os);
+void print_record(Record* record);
+void print_collection(Collection* collection);
 
 int main()
 {
@@ -93,7 +93,7 @@ int main()
                             else
                             {
                                 cout << "Library contains " << library_title.size() << " records:";
-                                apply_arg(library_title.begin(), library_title.end(), print_record, cout);
+                                apply(library_title.begin(), library_title.end(), print_record);
                             }
                             break;
                         }
@@ -106,7 +106,7 @@ int main()
                             else
                             {
                                 cout << "Catalog contains " << catalog.size() << " collections:";
-                                apply_arg(catalog.begin(), catalog.end(), print_collection, cout);
+                                apply(catalog.begin(), catalog.end(), print_collection);
                             }
                             break;
                         }
@@ -157,7 +157,7 @@ int main()
                             String medium, title;
                             cin >> medium;
                             title = title_read();
-                            if (library_title.find(&Record(title)) != nullptr)
+                            if (library_title.find(title) != nullptr)
                             {
                                 throw Error("Library already has a record with this title!");
                             }
@@ -171,7 +171,7 @@ int main()
                         {
                             String name;
                             cin >> name;
-                            if (catalog.find(&Collection(name)) != nullptr)
+                            if (catalog.find(name) != nullptr)
                             {
                                 throw Error("Catalog already has a collection with this name!");
                             }
@@ -414,7 +414,7 @@ Record* read_title_get_record(Ordered_list<Record*, Less_than_ptr<Record*>>& lib
 Ordered_list<*Record>::Iterator read_title_get_iter(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title)
 {
     String title = title_read();
-    auto record_iter = library_title.find(&Record(title));
+    auto record_iter = library_title.find(title);
     if (record_iter == nullptr)
     {
         throw Error("No record with that title!");
@@ -430,7 +430,7 @@ Record* read_id_get_record(Ordered_list<Record*, record_id_comp>& library_id)
 Ordered_list<Record*, record_id_comp>::Iterator read_id_get_iter(Ordered_list<Record*, record_id_comp>& library_id)
 {
     int id = integer_read();
-    auto record_iter = library_id.find(&Record(id));
+    auto record_iter = library_id.find(id);
     if (record_iter == nullptr)
     {
         throw Error("No record with that ID!");
@@ -494,12 +494,12 @@ bool check_record_in_collection(Collection *collection, Record *record)
     return collection->is_member_present(record);
 }
 
-void print_record(Record* record, std::ostream& os)
+void print_record(Record* record)
 {
-    os << "\n" << *record;
+    cout << "\n" << *record;
 }
 
-void print_collection(Collection* collection, std::ostream& os)
+void print_collection(Collection* collection)
 {
-    os << "\n" << *collection;
+    cout << "\n" << *collection;
 }
