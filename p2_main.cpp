@@ -298,7 +298,7 @@ int main()
                             file << catalog.size() << "\n";
                             for (auto catalog_iter = catalog.begin(); catalog_iter != catalog.end(); catalog_iter++)
                             {
-                                catalog_iter->save(file);
+                                (*catalog_iter)->save(file);
                                 catalog_iter++;
                             }
                             file.close();
@@ -345,7 +345,7 @@ int main()
                                 file >> num;
                                 while (num > 0)
                                 {
-                                    Collection *collection_ptr = new Collection(file);
+                                    Collection *collection_ptr = new Collection(file, new_library_title);
                                     new_catalog.insert(collection_ptr);
                                     num--;
                                 }
