@@ -474,7 +474,7 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
 }
 
 template<typename T, typename OF>
-typename Ordered_list<T, OF>::Iterator Ordered_list<T, OF>::find(const T& probe_datum) noexcept
+typename Ordered_list<T, OF>::Iterator Ordered_list<T, OF>::find(const T& probe_datum) const noexcept
 {
     Node *node = first;
     while (node != nullptr)
