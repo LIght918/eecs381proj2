@@ -64,16 +64,16 @@ void Collection::remove_member(Record* record_ptr)
     elements.erase(it);
 }
 
-void print_record_title(Record* record, std::ostream* os)
+void print_record_title(Record* record, std::ostream& os)
 {
-    *os << "\n" << record->get_title();
+    os << "\n" << record->get_title();
 }
 
 // Write a Collections's data to a stream in save format, with endl as specified.
 void Collection::save(std::ostream& os) const
 {
     os << name << " " << elements.size();
-    apply_arg(elements.begin(), elements.end(), print_record_title, &os);
+    apply_arg(elements.begin(), elements.end(), print_record_title, os);
     os << "\n";
 }
 
@@ -87,7 +87,7 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     }
     else
     {
-        apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, &os);
+        apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, os);
     }
     return os;
 }
