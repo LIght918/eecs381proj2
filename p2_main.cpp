@@ -157,7 +157,8 @@ int main()
                             String medium, title;
                             cin >> medium;
                             title = title_read();
-                            if (library_title.find(title) != nullptr)
+                            Record temp_record(title);
+                            if (library_title.find(&temp_record) != nullptr)
                             {
                                 throw Error("Library already has a record with this title!");
                             }
@@ -171,7 +172,8 @@ int main()
                         {
                             String name;
                             cin >> name;
-                            if (catalog.find(name) != nullptr)
+                            Collection temp_collection(name);
+                            if (catalog.find(&temp_collection) != nullptr)
                             {
                                 throw Error("Catalog already has a collection with this name!");
                             }
@@ -414,7 +416,8 @@ Record* read_title_get_record(Ordered_list<Record*, Less_than_ptr<Record*>>& lib
 Ordered_list<*Record>::Iterator read_title_get_iter(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title)
 {
     String title = title_read();
-    auto record_iter = library_title.find(title);
+    Record temp_record(title);
+    auto record_iter = library_title.find(&temp_record);
     if (record_iter == nullptr)
     {
         throw Error("No record with that title!");
@@ -430,7 +433,8 @@ Record* read_id_get_record(Ordered_list<Record*, record_id_comp>& library_id)
 Ordered_list<Record*, record_id_comp>::Iterator read_id_get_iter(Ordered_list<Record*, record_id_comp>& library_id)
 {
     int id = integer_read();
-    auto record_iter = library_id.find(id);
+    Record temp_record(id);
+    auto record_iter = library_id.find(&temp_record);
     if (record_iter == nullptr)
     {
         throw Error("No record with that ID!");
@@ -447,7 +451,8 @@ Ordered_list<Collection*, Less_than_ptr<Collection*>>::Iterator read_name_get_it
 {
     String name;
     cin >> name;
-    auto collection_iter = catalog.find(name);
+    Collection temp_collection(name);
+    auto collection_iter = catalog.find(&temp_collection);
     if (collection_iter == nullptr)
     {
         throw Error("No collection with that name!");
