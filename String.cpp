@@ -1,6 +1,5 @@
-#include <istream>
-#include <ostream>
 #include <iostream>
+#include <fstream>
 #include <string.h>
 #include "String.h"
 #include <assert.h>

@@ -3,7 +3,7 @@
 
 #include "p2_globals.h"
 #include <fstream>
-#include <ostream>
+#include <iostream>
 #include <cctype>
 #include "Record.h"
 #include "String.h"

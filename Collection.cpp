@@ -2,7 +2,7 @@
 #define COLLECTION_H
 
 #include <fstream>
-#include <ostream>
+#include <iostream>
 #include "p2_globals.h"
 #include "Utility.h"
 #include "Record.h"

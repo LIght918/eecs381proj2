@@ -287,15 +287,12 @@ int main()
                                 throw_file_error();
                             }
                             file << library_title.size() << "\n";
-                            auto library_iter = library_title.begin();
-                            while (library_iter != null)
+                            for (auto&& record : library_title)
                             {
-                                library_iter->save(file);
-                                library_iter++;
+                                record->save(file);
                             }
                             file << catalog.size() << "\n";
-                            auto catalog_iter = catalog.begin();
-                            while (catalog_iter != null)
+                            for (auto catalog_iter = catalog.begin(); catalog_iter != catalog.end(); catalog_iter++)
                             {
                                 catalog_iter->save(file);
                                 catalog_iter++;
