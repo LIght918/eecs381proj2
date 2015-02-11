@@ -366,7 +366,6 @@ template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list()
 {
     size = 0;
-    ordering_f = Less_than_ref<T>();
     first = nullptr;
     last = nullptr;
     g_Ordered_list_count++;
@@ -377,7 +376,6 @@ Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
 {
     clear();
     size = original.size;
-    ordering_f = original.ordering_f;
     if (size != 0)
     {
         Node *clone_node = Node(original.first->datum, nullptr, nullptr);
@@ -499,15 +497,12 @@ void Ordered_list<T, OF>::swap(Ordered_list & other)
     int temp_size = size;
     Node *temp_first = first;
     Node *temp_last = last;
-    OF temp_ordering = ordering_f;
     size = other.size;
     first = other.first;
     last = other.last;
-    ordering_f = other.ordering_f;
     other.size = temp_size;
     other.first = temp_first;
     other.last = temp_last;
-    other.ordering_f = temp_ordering;
 }
 
 template<typename T, typename OF>
