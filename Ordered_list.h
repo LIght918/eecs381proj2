@@ -243,9 +243,9 @@ public:
 				}
 			// Iterators are equal if they point to the same node
 			bool operator== (Iterator rhs) const
-				{ return node_ptr == rhs->node_ptr; }
+				{ return node_ptr == rhs.node_ptr; }
 			bool operator!= (Iterator rhs) const
-				{ return node_ptr != rhs->node_ptr; }
+				{ return node_ptr != rhs.node_ptr; }
 	
 			friend Ordered_list;
 
