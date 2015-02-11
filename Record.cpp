@@ -1,7 +1,6 @@
 #include "p2_globals.h"
 #include <fstream>
 #include <iostream>
-#include <ostream>
 #include <cctype>
 #include "Record.h"
 #include "String.h"
@@ -9,8 +8,8 @@
 
 const int rating_min = 1;
 const int rating_max = 5;
-Record::ID_counter = 0;
-Record::ID_backup = 0;
+int Record::ID_counter = 0;
+int Record::ID_backup = 0;
 
 // Create a Record object, giving it a unique ID number by first incrementing
 // a static member variable then using its value as the ID number. The rating is set to 0.
@@ -78,7 +77,7 @@ void Record::set_rating(int rating_)
 // The record number is saved.
 void Record::save(std::ostream &os) const
 {
-    os << ID << " " << medium << " " << rating << " " << title << endl;
+    os << ID << " " << medium << " " << rating << " " << title << "\n";
 }
 
 // Print a Record's data to the stream without a final endl.
