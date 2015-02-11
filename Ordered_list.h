@@ -374,7 +374,7 @@ Ordered_list<T, OF>::Ordered_list()
 template<typename T, typename OF>
 Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
 {
-    clear();
+    Ordered_list<T, OF>::clear();
     size = original.size;
     if (size != 0)
     {
@@ -415,7 +415,7 @@ Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& 
 template<typename T, typename OF>
 ~Ordered_list<T, OF>::Ordered_list()
 {
-    clear();
+    Ordered_list<T, OF>::clear();
     g_Ordered_list_count--;
 }
 
