@@ -161,11 +161,11 @@ public:
 
 	// Return the number of nodes in the list
 	int size() const
-		{return size;}
+		{return length;}
 
 	// Return true if the list is empty
 	bool empty() const
-		{return size == 0;}
+		{return length == 0;}
 		
 private:
 	// Node is a nested class that is private to the Ordered_list<T, OF> class.
@@ -365,7 +365,7 @@ bool apply_if_arg(IT first, IT last, F function, A arg)
 template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list()
 {
-    size = 0;
+    length = 0;
     first = nullptr;
     last = nullptr;
     g_Ordered_list_count++;
@@ -375,8 +375,8 @@ template<typename T, typename OF>
 Ordered_list<T, OF>& copy(Ordered_list<T, OF>& original)
 {
     Ordered_list<T, OF>::clear();
-    size = original.size;
-    if (size != 0)
+    length = original.length;
+    if (length != 0)
     {
         Node *clone_node = Node(original.first->datum, nullptr, nullptr);
         first = clone_node;
@@ -435,7 +435,7 @@ void Ordered_list<T, OF>::insert(const T& new_datum)
 template<typename T, typename OF>
 void Ordered_list<T, OF>::insert(T&& new_datum)
 {
-    size++;
+    length++;
     Node *node = first;
     if (node == nullptr)
     {
@@ -485,7 +485,7 @@ Iterator Ordered_list<T, OF>::find(const T& probe_datum)
 template<typename T, typename OF>
 void Ordered_list<T, OF>::erase(Iterator it)
 {
-    size--;
+    length--;
     it.node_ptr->prev->next = it.node_ptr->next;
     it.node_ptr->next->prev = it.node_ptr->prev;
     delete it.node_ptr;
@@ -494,13 +494,13 @@ void Ordered_list<T, OF>::erase(Iterator it)
 template<typename T, typename OF>
 void Ordered_list<T, OF>::swap(Ordered_list & other)
 {
-    int temp_size = size;
+    int temp_length = length;
     Node *temp_first = first;
     Node *temp_last = last;
-    size = other.size;
+    length = other.length;
     first = other.first;
     last = other.last;
-    other.size = temp_size;
+    other.length = temp_length;
     other.first = temp_first;
     other.last = temp_last;
 }
@@ -515,7 +515,7 @@ void Ordered_list<T, OF>::deallocate_nodes()
         delete node;
         node = next;
     }
-    size = 0;
+    length = 0;
     first = nullptr;
     last = nullptr;
 }
