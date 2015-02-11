@@ -9,6 +9,9 @@
 #include "String.h"
 #include "Utility.h"
 
+const int rating_min = 1;
+const int rating_max = 5;
+
 // Create a Record object, giving it a unique ID number by first incrementing
 // a static member variable then using its value as the ID number. The rating is set to 0.
 Record::Record(const String &medium_, const String &title_)
@@ -64,7 +67,7 @@ Record::Record(std::ifstream &is)
 // if the rating is not between 1 and 5 inclusive, an exception is thrown
 void Record::set_rating(int rating_)
 {
-    if (rating_ < 1 || rating_ > 5)
+    if (rating_ < rating_min || rating_ > rating_max)
     {
         throw Error("Rating is out of range!");
     }
