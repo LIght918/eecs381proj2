@@ -243,9 +243,9 @@ public:
 				}
 			// Iterators are equal if they point to the same node
 			bool operator== (Iterator rhs) const
-				{ return node_ptr == rhs.node_ptr; }
+				{ return !(ordering_f(node_ptr->datum, rhs.node_ptr->datum)) && !(ordering_f(rhs.node_ptr->datum, node_ptr->datum)); }
 			bool operator!= (Iterator rhs) const
-				{ return node_ptr != rhs.node_ptr; }
+				{ return !(*this == rhs); }
 	
 			friend Ordered_list;
 
