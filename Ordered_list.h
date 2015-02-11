@@ -374,7 +374,7 @@ Ordered_list<T, OF>::Ordered_list()
 template<typename T, typename OF>
 Ordered_list<T, OF>& Ordered_list<T,OF>::copy(Ordered_list<T, OF>& original) noexcept
 {
-    Ordered_list<T, OF>::clear();
+    clear();
     length = original.length;
     if (length != 0)
     {
@@ -413,15 +413,15 @@ Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>& 
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (const Ordered_list<T, OF>&& rhs) noexcept
+Ordered_list<T, OF>& Ordered_list<T, OF>::operator= (Ordered_list<T, OF>&& rhs) noexcept
 {
     swap(rhs);
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>::~Ordered_list<T, OF>::Ordered_list()
+Ordered_list<T, OF>::~Ordered_list<T, OF>()
 {
-    Ordered_list<T, OF>::clear();
+    clear();
     g_Ordered_list_count--;
 }
 
