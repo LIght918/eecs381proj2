@@ -419,7 +419,7 @@ Ordered_list<Record*, Less_than_ptr<Record*>>::Iterator read_title_get_iter(Orde
     String title = title_read();
     Record temp_record(title);
     auto record_iter = library_title.find(&temp_record);
-    if (record_iter == nullptr)
+    if (record_iter == library_title.end())
     {
         throw Error("No record with that title!");
     }
@@ -436,7 +436,7 @@ Ordered_list<Record*, record_id_comp>::Iterator read_id_get_iter(Ordered_list<Re
     int id = integer_read();
     Record temp_record(id);
     auto record_iter = library_id.find(&temp_record);
-    if (record_iter == nullptr)
+    if (record_iter == library_id.end())
     {
         throw Error("No record with that ID!");
     }
@@ -454,7 +454,7 @@ Ordered_list<Collection*, Less_than_ptr<Collection*>>::Iterator read_name_get_it
     cin >> name;
     Collection temp_collection(name);
     auto collection_iter = catalog.find(&temp_collection);
-    if (collection_iter == nullptr)
+    if (collection_iter == catalog.end())
     {
         throw Error("No collection with that name!");
     }
@@ -464,16 +464,10 @@ Ordered_list<Collection*, Less_than_ptr<Collection*>>::Iterator read_name_get_it
 void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>> library_title, Ordered_list<Record*, record_id_comp> library_id)
 {
     auto title_iter = library_title.begin();
-    while (title_iter != nullptr)
+    while (title_iter != library_title.end())
     {
         delete *title_iter;
         title_iter++;
-    }
-    auto id_iter = library_id.begin();
-    while (id_iter != nullptr)
-    {
-        delete *id_iter;
-        id_iter++;
     }
     library_title.clear();
     library_id.clear();
@@ -482,7 +476,7 @@ void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>> library_title
 void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>> catalog)
 {
     auto catalog_iter = catalog.begin();
-    while (catalog_iter != nullptr)
+    while (catalog_iter != catalog.end())
     {
         delete *catalog_iter;
         catalog_iter++;
