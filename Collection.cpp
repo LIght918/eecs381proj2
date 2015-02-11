@@ -13,7 +13,7 @@
     No check made for whether the Collection already exists or not.
     Throw Error exception if invalid data discovered in file.
     String data input is read directly into the member variable. */
-Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_ptr<Record*>()>& library)
+Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_ptr<Record*>>& library)
 {
     int num;
     if (!(is >> name >> num))
