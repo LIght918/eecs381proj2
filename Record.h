@@ -2,6 +2,7 @@
 #define RECORD_H
 
 #include "p2_globals.h"
+#include "String.h"
 #include <fstream>
 #include <ostream>
 
