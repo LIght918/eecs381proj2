@@ -1,6 +1,3 @@
-#ifndef COLLECTION_H
-#define COLLECTION_H
-
 #include <fstream>
 #include <iostream>
 #include "p2_globals.h"
@@ -92,5 +89,3 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     }
     return os;
 }
-
-#endif

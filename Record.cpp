@@ -1,6 +1,3 @@
-#ifndef RECORD_H
-#define RECORD_H
-
 #include "p2_globals.h"
 #include <fstream>
 #include <iostream>
@@ -91,5 +88,3 @@ std::ostream& operator<< (std::ostream& os, const Record& record)
     os << record.ID << ": " << record.medium << " " << (record.rating != 0 ? record.rating : 'u') << " " << record.title;
     return os;
 }
-
-#endif
