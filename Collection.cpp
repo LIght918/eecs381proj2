@@ -85,7 +85,10 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     }
     else
     {
-        apply_arg(collection.elements.begin(), collection.elements.end(), print_record_title, os);
+        for (auto it = elements.begin(); it != elements.end(); it++)
+        {
+            os << "\n" << (*it)->get_title();
+        }
     }
     return os;
 }
