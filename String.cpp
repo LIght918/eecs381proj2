@@ -64,6 +64,7 @@ void String::resize(int n)
         return;
     }
     assert(allocation > 0);
+    cout << "data is " << data << endl;
     if (allocation < length + n + 1)
     {
         int new_alloc = 2 * (length + n + 1);
