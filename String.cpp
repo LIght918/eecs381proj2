@@ -364,8 +364,6 @@ istream& operator>> (istream& is, String& str)
             if (!leading) trailing = true;
         }
     }
-    cerr << "escaped >>" << endl;
-    cerr << "data is " << str << endl;
     is.unget();
     return is;
 }
@@ -394,8 +392,6 @@ istream& getline(istream& is, String& str)
             break;
         }
     }
-    cerr << "escaped getline" << endl;
-    cerr << "data is " << str << endl;
     is.unget();
     return is;
 }
