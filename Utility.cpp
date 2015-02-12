@@ -27,7 +27,8 @@ String title_read()
     {
         String title;
         getline(cin, title);
-        title = parse_title(title);
+        String parsed_title = parse_title(title);
+        title = parsed_title;
         if (title.size() == 0)
         {
             throw String_exception("");
