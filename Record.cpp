@@ -6,6 +6,10 @@
 #include "String.h"
 #include "Utility.h"
 
+#include <string.h>
+#include <iostream>
+using namespace std;
+
 const int rating_min = 1;
 const int rating_max = 5;
 int Record::ID_counter = 0;
@@ -52,6 +56,8 @@ Record::Record(std::ifstream &is)
     {
         throw_file_error();
     }
+    cout << "medium allocation is " << medium.get_allocation() << endl;
+    cout << "strlen(medium) is " << strlen(medium.c_str()) << endl;
     if (ID > ID_counter)
     {
         ID_counter = ID;
