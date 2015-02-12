@@ -20,7 +20,7 @@ bool String::messages_wanted = false;	// whether to output constructor/destructo
 void String::deconstruct()
 {
     cerr << "deallocating " << allocation << endl;
-    cerr << "data is ";
+    cerr << "data (" << static_cast<void*>(data) << ") is ";
     if (data == &a_null_byte)
     {
         cerr << "null" << endl;
