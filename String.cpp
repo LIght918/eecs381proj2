@@ -118,7 +118,7 @@ String::~String() noexcept
         cerr << "string size = " << size() << endl;
         cerr << "dtor data is " << data << endl;
         cerr << "dtor *this is " << *this << endl;
-        cout << "Dtor: \"" << "\"\n"; // ***
+        cout << "Dtor: \"" << size() == 0 ? &a_null_byte : data << "\"\n"; // ***
     }
     deconstruct();
 }
