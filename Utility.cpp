@@ -43,9 +43,12 @@ String parse_title(String& title_string)
 {
     istringstream is(title_string.c_str());
     String title, substring;
+    cerr << "declared" << endl;
     while(is >> substring)
     {
+        cerr << "before +=" << endl;
         title += substring;
+        cerr << "after +=" << endl;
     }
     if (title.size() == 0)
     {
