@@ -28,8 +28,8 @@ void String::deconstruct()
 // allocates a new char * and keeps track of total_allocation
 char* String::allocate(int n)
 {
-    total_allocation += n + 1;
-    return new char[n + 1];
+    total_allocation += n;
+    return new char[n];
 }
 
 // resizes the string to handle if the length was increased by n characters
@@ -38,7 +38,7 @@ void String::resize(int n)
     assert(n > 0);
     if (allocation == 0)
     {
-        allocation = n;
+        allocation = n + 1;
         data = allocate(allocation);
         length = 0;
         return;
