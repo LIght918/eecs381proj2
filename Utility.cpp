@@ -50,7 +50,8 @@ String parse_title(String& title_string)
     }
     if (title.size() == 0)
     {
-        return String();
+        String empty;
+        return empty;
     }
     return title.substring(0, title.size() - 1);
 }
