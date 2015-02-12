@@ -81,10 +81,10 @@ String::String(const char* cstr_)
     int cstrlength = strlen(cstr_);
     if (cstrlength > 0)
     {
-        data = allocate(cstrlength + 1);
+        allocation = cstrlength + 1;
+        data = allocate(allocation);
         strcpy(data, cstr_);
         length = cstrlength;
-        allocation = length + 1;
     }
 }
 // The copy constructor initializes this String with the original's data,
