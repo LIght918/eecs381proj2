@@ -303,19 +303,19 @@ void String::swap(String& other) noexcept
 
 // compare lhs and rhs strings; constructor will convert a C-string literal to a String.
 // comparison is based on std::strcmp result compared to 0
-bool String::operator== (const String& lhs, const String& rhs)
+bool operator== (const String& lhs, const String& rhs)
 {
     return strcmp(lhs.data, rhs.data) == 0;
 }
-bool String::operator!= (const String& lhs, const String& rhs)
+bool operator!= (const String& lhs, const String& rhs)
 {
     return strcmp(lhs.data, rhs.data) != 0;
 }
-bool String::operator< (const String& lhs, const String& rhs)
+bool operator< (const String& lhs, const String& rhs)
 {
     return strcmp(lhs.data, rhs.data) < 0;
 }
-bool String::operator> (const String& lhs, const String& rhs)
+bool operator> (const String& lhs, const String& rhs)
 {
     return strcmp(lhs.data, rhs.data) > 0;
 }
@@ -326,7 +326,7 @@ bool String::operator> (const String& lhs, const String& rhs)
  This automatic behavior would be disabled if the String constructor was declared "explicit".
  This function constructs a copy of the lhs in a local String variable,
  then concatenates the rhs to it with operator +=, and returns it. */
-String String::operator+ (const String& lhs, const String& rhs)
+String operator+ (const String& lhs, const String& rhs)
 {
     String sum(lhs);
     sum += rhs;
@@ -335,7 +335,7 @@ String String::operator+ (const String& lhs, const String& rhs)
 
 // Input and output operators and functions
 // The output operator writes the contents of the String to the stream
-std::ostream& String::operator<< (std::ostream& os, const String& str)
+std::ostream& operator<< (std::ostream& os, const String& str)
 {
     os << str.data;
     return os;
@@ -347,7 +347,7 @@ the supplied str until whitespace is encountered again. The terminating
 whitespace remains in the input stream, analogous to how string input normally works.
 str is expanded as needed, and retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
-std::istream& String::operator>> (std::istream& is, String& str)
+std::istream& operator>> (std::istream& is, String& str)
 {
     clear(str);
     bool leading = true;
@@ -382,7 +382,7 @@ std::istream& String::operator>> (std::istream& is, String& str)
 which is left in the stream (this differs from the fgets and std::getline functions).
 str's allocation is expanded as needed, and it retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
-std::istream& String::getline(std::istream& is, String& str)
+std::istream& getline(std::istream& is, String& str)
 {
     clear(str);
     while (true)
