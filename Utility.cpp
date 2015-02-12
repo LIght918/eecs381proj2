@@ -25,8 +25,7 @@ String title_read(istream &is)
 {
     String title;
     getline(is, title);
-    String parsed_title = parse_title(title);
-    title = parsed_title;
+    title = parse_title(title);
     if (title.size() == 0)
     {
         throw Error("Could not read a title!");
