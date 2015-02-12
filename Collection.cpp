@@ -7,6 +7,10 @@
 #include "Ordered_list.h"
 #include "String.h"
 
+#include <string.h>
+#include <iostream>
+using namespace std;
+
 /* Construct a Collection from an input file stream in save format, using the record list,
     restoring all the Record information.
     Record list is needed to resolve references to record members.
@@ -20,6 +24,8 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     {
         throw_file_error();
     }
+    cout << "name allocation is " << name.get_allocation() << endl;
+    cout << "strlen(name) is " << strlen(name.c_str()) << endl;
     for (int i = 0; i < num; i++)
     {
         is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
