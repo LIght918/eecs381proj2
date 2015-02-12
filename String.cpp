@@ -63,14 +63,6 @@ void String::resize(int n)
     }
 }
 
-// copies the rhs into this string
-String& String::copy(const String& rhs)
-{
-    String temp(rhs.data);
-    swap(temp);
-    return *this;
-}
-
 // Default initialization is to contain an empty string with no allocation.
 // If a non-empty C-string is supplied, this String gets minimum allocation.
 String::String(const char* cstr_)
@@ -101,7 +93,8 @@ String::String(const String& original)
     {
         cout << "Copy ctor: \"" << original << "\"\n";
     }
-    copy(original);
+    String temp(original.data);
+    swap(temp);
 }
 // Move constructor - take original's data, and set the original String
 // member variables to the empty state (do not initialize "this" String and swap).
@@ -139,7 +132,16 @@ String& String::operator= (const String& rhs)
     {
         cout << "Copy assign from String:  \"" << rhs << "\"\n";
     }
-    copy(rhs);
+    String temp;
+    if (rhs.allocation > 0)
+    {
+        char *new_data = allocate(rhs.allocation);
+        temp.data = new_data;
+        strcpy(new_data, rhs.data);
+        temp.allocation = rhs.allocation;
+        temp.length = rhs.length;
+    }
+    swap(temp);
     return *this;
 }
 // This operator creates a temporary String object from the rhs C-string, and swaps the contents
