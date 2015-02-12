@@ -214,7 +214,7 @@ String String::substring(int i, int len) const
 void String::clear()
 {
     String empty();
-    swap(empty);
+    swap(&empty);
 }
 
 /* Remove the len characters starting at i; allocation is unchanged.
