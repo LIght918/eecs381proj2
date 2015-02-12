@@ -87,7 +87,7 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     {
         for (auto it = collection.elements.begin(); it != collection.elements.end(); it++)
         {
-            os << "\n" << *i;
+            os << "\n" << *it;
         }
     }
     return os;
