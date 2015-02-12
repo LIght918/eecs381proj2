@@ -371,6 +371,7 @@ std::istream& operator>> (std::istream& is, String& str)
         }
     }
     std::cerr << "escaped >>" << std::endl;
+    std::cerr << "data is " << str << std::endl;
     is.unget();
     return is;
 }
@@ -400,6 +401,7 @@ std::istream& getline(std::istream& is, String& str)
         }
     }
     std::cerr << "escaped getline" << std::endl;
+    std::cerr << "data is " << str << std::endl;
     is.unget();
     return is;
 }
