@@ -29,6 +29,7 @@ void String::deconstruct()
             cerr << data << endl;
             cerr << static_cast<void*>(data) << endl;
         }
+        //assert(allocation != 0);
         cerr << "decrease by " << allocation << endl;
         total_allocation -= allocation;
         delete[] data;
@@ -74,6 +75,7 @@ void String::resize(int n)
         data = new_data;
         allocation = new_alloc;
     }
+    cout << "data is now " << data << endl;
 }
 
 // copies the rhs into this string
