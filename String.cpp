@@ -21,7 +21,14 @@ void String::deconstruct()
 {
     if (data != nullptr && data != &a_null_byte)
     {
-        assert(allocation != 0);
+        if (allocation == 0)
+        {
+            cerr << "FAILURE" << endl;
+            cerr << allocation << endl;
+            cerr << data << endl;
+            cerr << static_cast<void*>(data) << endl;
+            assert(allocation != 0);
+        }
         cerr << "decrease by " << allocation << endl;
         total_allocation -= allocation;
         delete[] data;
