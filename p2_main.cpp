@@ -89,7 +89,7 @@ int main()
                         {
                             if (library_title.empty())
                             {
-                                cout << "Library is empty" << "\n";
+                                cout << "Library is empty\n";
                             }
                             else
                             {
@@ -103,7 +103,7 @@ int main()
                         {
                             if (catalog.empty())
                             {
-                                cout << "Catalog is empty";
+                                cout << "Catalog is empty\n";
                             }
                             else
                             {
