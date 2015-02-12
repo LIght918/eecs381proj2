@@ -168,7 +168,7 @@ int main()
                             Record *record = new Record(medium, title);
                             library_id.insert(record);
                             library_title.insert(record);
-                            cout << "Record " << record->get_ID() << " added\\n";
+                            cout << "Record " << record->get_ID() << " added\n";
                             break;
                         }
                         case 'c': /* add collection */
