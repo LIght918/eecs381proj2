@@ -310,7 +310,7 @@ void String::swap(String& other) noexcept
     int temp_alloc = allocation;
     data = other.data;
     length = other.length;
-    allocation = temp_alloc;
+    allocation = other.allocation;
     other.data = temp_data;
     other.length = temp_length;
     other.allocation = temp_alloc;
