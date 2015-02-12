@@ -25,6 +25,7 @@ void String::deconstruct()
         {
             cerr << "FAILURE" << endl;
             cerr << allocation << endl;
+            cerr << length << endl;
             cerr << data << endl;
             cerr << static_cast<void*>(data) << endl;
             assert(allocation != 0);
