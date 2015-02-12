@@ -71,22 +71,6 @@ String& String::copy(const String& rhs)
     return *this;
 }
 
-// copies the rhs into this string
-String& String::copy(const char* rhs)
-{
-    String temp;
-    int cstrlength = strlen(rhs);
-    if (cstrlength > 0)
-    {
-        temp.data = allocate(cstrlength + 1);
-        strcpy(temp.data, rhs);
-        temp.length = cstrlength;
-        temp.allocation = length + 1;
-    }
-    swap(temp);
-    return *this;
-}
-
 // Default initialization is to contain an empty string with no allocation.
 // If a non-empty C-string is supplied, this String gets minimum allocation.
 String::String(const char* cstr_)
@@ -94,17 +78,18 @@ String::String(const char* cstr_)
     number++;
     if (messages_wanted)
     {
-        std::cout << "Ctor: \"" << cstr_ << "\"";
+        std::cout << "Ctor: \"" << cstr_ << "\"" << "\n";
     }
-    if (strlen(cstr_) == 0)
+    data = &a_null_byte;
+    allocation = 0;
+    length = 0;
+    int cstrlength = strlen(rhs);
+    if (cstrlength > 0)
     {
-        data = &a_null_byte;
-        allocation = 0;
-        length = 0;
-    }
-    else
-    {
-        copy(cstr_);
+        data = allocate(cstrlength + 1);
+        strcpy(temp.data, rhs);
+        length = cstrlength;
+        allocation = length + 1;
     }
 }
 // The copy constructor initializes this String with the original's data,
@@ -114,7 +99,7 @@ String::String(const String& original)
     number++;
     if (messages_wanted)
     {
-        std::cout << "Copy ctor: \"" << original << "\"";
+        std::cout << "Copy ctor: \"" << original << "\"" << "\n";
     }
     copy(original);
 }
@@ -125,7 +110,7 @@ String::String(String&& original) noexcept
     number++;
     if (messages_wanted)
     {
-        std::cout << "Move ctor: \"" << original << "\"";
+        std::cout << "Move ctor: \"" << original << "\"" << "\n";
     }
     swap(original);
 }
@@ -133,6 +118,10 @@ String::String(String&& original) noexcept
 String::~String() noexcept
 {
     number--;
+    if (messages_wanted)
+    {
+        std::cout << "Dtor: \"" << *this << "\"" << "\n";
+    }
     deconstruct();
 }
 
@@ -143,7 +132,7 @@ String& String::operator= (const String& rhs)
 {
     if (messages_wanted)
     {
-        std::cout << "Copy assign from String:  \"" << rhs << "\"";
+        std::cout << "Copy assign from String:  \"" << rhs << "\"" << "\n";
     }
     copy(rhs);
     return *this;
@@ -153,7 +142,7 @@ String& String::operator= (const char* rhs)
 {
     if (messages_wanted)
     {
-        std::cout << "Assign from C-string:  \"" << rhs << "\"";
+        std::cout << "Assign from C-string:  \"" << rhs << "\"" << "\n";
     }
     String temp(rhs);
     swap(temp);
@@ -164,7 +153,7 @@ String& String::operator= (String&& rhs) noexcept
 {
     if (messages_wanted)
     {
-        std::cout << "Move assign from String:  \"" << rhs << "\"";
+        std::cout << "Move assign from String:  \"" << rhs << "\"" << "\n";
     }
     swap(rhs);
     return *this;
