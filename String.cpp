@@ -337,7 +337,7 @@ String operator+ (const String& lhs, const String& rhs)
 // The output operator writes the contents of the String to the stream
 std::ostream& operator<< (std::ostream& os, const String& str)
 {
-    os << str.data;
+    os << str.c_str();
     return os;
 }
 
@@ -357,7 +357,7 @@ std::istream& operator>> (std::istream& is, String& str)
         char next;
         if (!(is >> next))
         {
-            throw String_exception();
+            throw String_exception(">> error");
         }
         if (!isspace(next))
         {
@@ -390,7 +390,7 @@ std::istream& getline(std::istream& is, String& str)
         char next;
         if (!(is >> next))
         {
-            throw String_exception();
+            throw String_exception("getline failure");
         }
         if (next != '\n')
         {
