@@ -106,6 +106,9 @@ String::String(String&& original) noexcept
         cout << "Move ctor: \"" << original << "\"\n";
     }
     swap(original);
+    original.data = &a_null_byte;
+    original.allocation = 0;
+    original.length = 0;
 }
 // deallocate C-string memory
 String::~String() noexcept
@@ -132,14 +135,7 @@ String& String::operator= (const String& rhs)
     {
         cout << "Copy assign from String:  \"" << rhs << "\"\n";
     }
-    String temp;
-    if (rhs.allocation > 0)
-    {
-        temp.data = allocate(rhs.allocation);
-        strcpy(temp.data, rhs.data);
-        temp.allocation = rhs.allocation;
-        temp.length = rhs.length;
-    }
+    String temp(rhs);
     swap(temp);
     return *this;
 }
