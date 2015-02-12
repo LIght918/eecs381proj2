@@ -29,10 +29,10 @@ void String::deconstruct()
 // allocates a new char * and keeps track of total_allocation
 char* String::allocate(int n)
 {
+    cerr << "increase by " << n << endl;
     total_allocation += n;
     char* new_data = new char[n];
     memset(new_data, '\0', n);
-    cerr << "allocating (" << static_cast<void*>(new_data) << ") " << n << endl;
     return new_data;
 }
 
@@ -50,6 +50,7 @@ void String::resize(int n)
     assert(allocation > 0);
     if (allocation < length + n + 1)
     {
+        cerr << "decrease by " << allocation << endl;
         total_allocation -= allocation;
         allocation = 2 * (length + n + 1);
         char* new_data = allocate(allocation);
@@ -123,6 +124,7 @@ String::~String() noexcept
         }
         cout << "\"\n"; // ***
     }
+    cerr << "decrease by " << allocation << endl;
     total_allocation -= allocation;
     deconstruct();
 }
@@ -207,7 +209,8 @@ String String::substring(int i, int len) const
 // Set to an empty string with minimum allocation by create/swap with an empty string.
 void String::clear()
 {
-    *this = String();
+    String empty;
+    swap(empty);
 }
 
 /* Remove the len characters starting at i; allocation is unchanged.
