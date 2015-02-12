@@ -21,8 +21,16 @@ void String::deconstruct()
 {
     if (data != nullptr && data != &a_null_byte)
     {
+        cerr << "decrease by " << allocation << endl;
+        total_allocation -= allocation;
         delete[] data;
     }
+    else
+    {
+        assert(allocation == 0 && length == 0);
+    }
+    allocation = 0;
+    length = 0;
     data = &a_null_byte;
 }
 
@@ -50,13 +58,12 @@ void String::resize(int n)
     assert(allocation > 0);
     if (allocation < length + n + 1)
     {
-        cerr << "decrease by " << allocation << endl;
-        total_allocation -= allocation;
-        allocation = 2 * (length + n + 1);
-        char* new_data = allocate(allocation);
+        int new_alloc = 2 * (length + n + 1);
+        char* new_data = allocate(new_alloc);
         strcpy(new_data, data);
         deconstruct();
         data = new_data;
+        allocation = new_alloc;
     }
 }
 
@@ -124,8 +131,6 @@ String::~String() noexcept
         }
         cout << "\"\n"; // ***
     }
-    cerr << "decrease by " << allocation << endl;
-    total_allocation -= allocation;
     deconstruct();
 }
 
