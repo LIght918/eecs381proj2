@@ -25,7 +25,7 @@ Record::Record(const String &medium_, const String &title_)
 Record::Record(const String &title_)
 {
     title = title_;
-    ID = ++ID_counter;
+    ID = 0;
 }
 
 // Create a Record object suitable for use as a probe containing the supplied

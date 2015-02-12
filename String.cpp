@@ -73,7 +73,7 @@ String::String(const char* cstr_)
     number++;
     if (messages_wanted)
     {
-        cout << "Ctor: \"" << cstr_ << "\"" << endl;
+        cout << "\n" << "Ctor: \"" << cstr_ << "\"";
     }
     data = &a_null_byte;
     allocation = 0;
@@ -94,7 +94,7 @@ String::String(const String& original)
     number++;
     if (messages_wanted)
     {
-        cout << "Copy ctor: \"" << original << "\"" << endl;
+        cout << "\n" << "Copy ctor: \"" << original << "\"";
     }
     copy(original);
 }
@@ -105,7 +105,7 @@ String::String(String&& original) noexcept
     number++;
     if (messages_wanted)
     {
-        cout << "Move ctor: \"" << original << "\"" << endl;
+        cout << "\n" << "Move ctor: \"" << original << "\"";
     }
     swap(original);
 }
@@ -115,7 +115,7 @@ String::~String() noexcept
     number--;
     if (messages_wanted)
     {
-        cout << "Dtor: \"" << "\"" << endl; // ***
+        cout << "\n" << "Dtor: \"" << "\""; // ***
     }
     deconstruct();
 }
@@ -127,7 +127,7 @@ String& String::operator= (const String& rhs)
 {
     if (messages_wanted)
     {
-        cout << "Copy assign from String:  \"" << rhs << "\"" << endl;
+        cout << "\n" << "Copy assign from String:  \"" << rhs << "\"";
     }
     copy(rhs);
     return *this;
@@ -137,7 +137,7 @@ String& String::operator= (const char* rhs)
 {
     if (messages_wanted)
     {
-        cout << "Assign from C-string:  \"" << rhs << "\"" << endl;
+        cout << "\n" << "Assign from C-string:  \"" << rhs << "\"";
     }
     String temp(rhs);
     swap(temp);
