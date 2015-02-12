@@ -6,6 +6,8 @@
 #include <cctype>
 #include "Utility.h"
 
+using namespace std;
+
 char String::a_null_byte = '\0';	// to hold a null byte for empty string representation
 
 /* Variables for monitoring functions - not part of a normal implementation. */
@@ -78,7 +80,7 @@ String::String(const char* cstr_)
     number++;
     if (messages_wanted)
     {
-        std::cout << "Ctor: \"" << cstr_ << "\"" << "\n";
+        cout << "Ctor: \"" << cstr_ << "\"" << endl;
     }
     data = &a_null_byte;
     allocation = 0;
@@ -99,7 +101,7 @@ String::String(const String& original)
     number++;
     if (messages_wanted)
     {
-        std::cout << "Copy ctor: \"" << original << "\"" << "\n";
+        cout << "Copy ctor: \"" << original << "\"" << endl;
     }
     copy(original);
 }
@@ -110,7 +112,7 @@ String::String(String&& original) noexcept
     number++;
     if (messages_wanted)
     {
-        std::cout << "Move ctor: \"" << original << "\"" << "\n";
+        cout << "Move ctor: \"" << original << "\"" << endl;
     }
     swap(original);
 }
@@ -120,7 +122,7 @@ String::~String() noexcept
     number--;
     if (messages_wanted)
     {
-        std::cout << "Dtor: \"" << *this << "\"" << "\n";
+        cout << "Dtor: \"" << *this << "\"" << endl;
     }
     deconstruct();
 }
@@ -132,7 +134,7 @@ String& String::operator= (const String& rhs)
 {
     if (messages_wanted)
     {
-        std::cout << "Copy assign from String:  \"" << rhs << "\"" << "\n";
+        cout << "Copy assign from String:  \"" << rhs << "\"" << endl;
     }
     copy(rhs);
     return *this;
@@ -142,7 +144,7 @@ String& String::operator= (const char* rhs)
 {
     if (messages_wanted)
     {
-        std::cout << "Assign from C-string:  \"" << rhs << "\"" << "\n";
+        cout << "Assign from C-string:  \"" << rhs << "\"" << endl;
     }
     String temp(rhs);
     swap(temp);
@@ -153,7 +155,7 @@ String& String::operator= (String&& rhs) noexcept
 {
     if (messages_wanted)
     {
-        std::cout << "Move assign from String:  \"" << rhs << "\"" << "\n";
+        cout << "Move assign from String:  \"" << rhs << "\"" << endl;
     }
     swap(rhs);
     return *this;
@@ -294,7 +296,7 @@ void String::swap(String& other) noexcept
 // non-member overloaded operators
 
 // compare lhs and rhs strings; constructor will convert a C-string literal to a String.
-// comparison is based on std::strcmp result compared to 0
+// comparison is based on strcmp result compared to 0
 bool operator== (const String& lhs, const String& rhs)
 {
     return strcmp(lhs.c_str(), rhs.c_str()) == 0;
@@ -327,7 +329,7 @@ String operator+ (const String& lhs, const String& rhs)
 
 // Input and output operators and functions
 // The output operator writes the contents of the String to the stream
-std::ostream& operator<< (std::ostream& os, const String& str)
+ostream& operator<< (ostream& os, const String& str)
 {
     os << str.c_str();
     return os;
@@ -339,7 +341,7 @@ the supplied str until whitespace is encountered again. The terminating
 whitespace remains in the input stream, analogous to how string input normally works.
 str is expanded as needed, and retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
-std::istream& operator>> (std::istream& is, String& str)
+istream& operator>> (istream& is, String& str)
 {
     str.clear();
     bool leading = true;
@@ -352,7 +354,7 @@ std::istream& operator>> (std::istream& is, String& str)
             if (is.eof()) break;
             throw String_exception(">> error");
         }
-        std::cerr << next;
+        cerr << next;
         if (!isspace(next))
         {
             str += next;
@@ -363,17 +365,17 @@ std::istream& operator>> (std::istream& is, String& str)
             if (!leading) trailing = true;
         }
     }
-    std::cerr << "escaped >>" << std::endl;
-    std::cerr << "data is " << str << std::endl;
+    cerr << "escaped >>" << endl;
+    cerr << "data is " << str << endl;
     is.unget();
     return is;
 }
 
 /* getline for String clears str to an empty String, then reads characters into str until it finds a '\n',
-which is left in the stream (this differs from the fgets and std::getline functions).
+which is left in the stream (this differs from the fgets and getline functions).
 str's allocation is expanded as needed, and it retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
-std::istream& getline(std::istream& is, String& str)
+istream& getline(istream& is, String& str)
 {
     str.clear();
     while (true)
@@ -384,7 +386,7 @@ std::istream& getline(std::istream& is, String& str)
             if (is.eof()) break;
             throw String_exception("getline failure");
         }
-        std::cerr << next;
+        cerr << next;
         if (next != '\n')
         {
             str += next;
@@ -394,8 +396,8 @@ std::istream& getline(std::istream& is, String& str)
             break;
         }
     }
-    std::cerr << "escaped getline" << std::endl;
-    std::cerr << "data is " << str << std::endl;
+    cerr << "escaped getline" << endl;
+    cerr << "data is " << str << endl;
     is.unget();
     return is;
 }
