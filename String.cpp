@@ -18,11 +18,11 @@ bool String::messages_wanted = false;	// whether to output constructor/destructo
 void String::deconstruct()
 {
     total_allocation -= allocation;
-    if (data != nullptr && data != a_null_byte)
+    if (data != nullptr && data != &a_null_byte)
     {
         delete[] data;
     }
-    data = a_null_byte;
+    data = &a_null_byte;
 }
 
 // allocates a new char * and keeps track of total_allocation
