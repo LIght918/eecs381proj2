@@ -6,13 +6,13 @@
 #include <cctype>
 #include "Utility.h"
 
-static char String::a_null_byte = '\0';	// to hold a null byte for empty string representation
+char String::a_null_byte = '\0';	// to hold a null byte for empty string representation
 
 /* Variables for monitoring functions - not part of a normal implementation. */
 /* But used here for demonstration and testing purposes. */
-static int String::number = 0;				// counts number of String objects in existence
-static int String::total_allocation = 0;	// counts total amount of memory allocated
-static bool String::messages_wanted = false;	// whether to output constructor/destructor/operator= messages, initially false
+int String::number = 0;				// counts number of String objects in existence
+int String::total_allocation = 0;	// counts total amount of memory allocated
+bool String::messages_wanted = false;	// whether to output constructor/destructor/operator= messages, initially false
 
 // deallocates data
 void deconstruct()
