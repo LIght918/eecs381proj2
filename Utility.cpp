@@ -46,8 +46,6 @@ String parse_title(String& title_string)
     while(is >> substring)
     {
         title += substring;
-        title += " ";
-        cerr << "title is now " << title << endl;
     }
     if (title.size() == 0)
     {
