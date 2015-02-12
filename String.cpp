@@ -349,20 +349,16 @@ str is expanded as needed, and retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
 std::istream& operator>> (std::istream& is, String& str)
 {
-    std::cerr << "operator>>" << std::endl;
     str.clear();
-    std::cerr << "cleared" << std::endl;
     bool leading = true;
     bool trailing = false;
     while (leading || !trailing)
     {
-        std::cerr << "looping" << std::endl;
         char next;
-        if (!(is >> next))
+        if (!(is.get(next)))
         {
             throw String_exception(">> error");
         }
-        std::cerr << "char is " << next << std::endl;
         if (!isspace(next))
         {
             str += next;
@@ -372,12 +368,8 @@ std::istream& operator>> (std::istream& is, String& str)
         {
             if (!leading) trailing = true;
         }
-        std::cerr << "leading = " << leading << std::endl;
-        std::cerr << "trailing = " << trailing << std::endl;
     }
-    std::cerr << "out" << std::endl;
     is.unget();
-    std::cerr << "returning" << std::endl;
     return is;
 }
 
@@ -391,7 +383,7 @@ std::istream& getline(std::istream& is, String& str)
     while (true)
     {
         char next;
-        if (!(is >> next))
+        if (!(is.get(next)))
         {
             throw String_exception("getline failure");
         }
