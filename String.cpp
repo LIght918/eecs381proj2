@@ -58,12 +58,12 @@ void String::resize(int n)
 String& String::copy(String& rhs)
 {
     deconstruct();
-    if (original.length > 0)
+    if (rhs.length > 0)
     {
-        allocation = original.allocation;
+        allocation = rhs.allocation;
         data = allocate(allocation);
-        strcpy(data, original.data);
-        length = original.length;
+        strcpy(data, rhs.data);
+        length = rhs.length;
     }
     else
     {
