@@ -41,9 +41,9 @@ void String::deconstruct()
 char* String::allocate(int n)
 {
     total_allocation += n;
-    cerr << "allocating " << n << endl;
     char* new_data = new char[n];
     memset(new_data, '\0', n);
+    cerr << "allocating (" << static_cast<void*>(new_data) << ")" << n << endl;
     return new_data;
 }
 
