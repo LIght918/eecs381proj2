@@ -29,9 +29,7 @@ void String::deconstruct()
 char* String::allocate(int n)
 {
     total_allocation += n + 1;
-    char *new_data = new char[n + 1];
-    memset(new_data, '\0', n + 1);
-    return new_data;
+    return new char[n + 1];
 }
 
 // resizes the string to handle if the length was increased by n characters
@@ -40,12 +38,12 @@ void String::resize(int n)
     assert(n > 0);
     if (allocation == 0)
     {
-        data = allocate(n + 1);
-        length = 0;
         allocation = n + 1;
+        data = allocate(allocation);
+        length = 0;
         return;
     }
-    assert(allocation > 0 && data != nullptr && data != &a_null_byte);
+    assert(allocation > 0);
     if (allocation < length + n + 1)
     {
         allocation = 2 * (length + n + 1);
@@ -264,8 +262,14 @@ final memory allocation. If the rhs is a null byte or an empty C-string or Strin
 no change is made to lhs String. */
 String& String::operator += (char rhs)
 {
+    std::cerr << "about to resize by 1" << std::endl;
+    std::cerr << allocation << std::endl;
+    std::cerr << length << std::endl;
     resize(1);
     data[length++] = rhs;
+    std::cerr << allocation << std::endl;
+    std::cerr << length << std::endl;
+    std::cerr << "done resize" << std::endl;
     return *this;
 }
 String& String::operator += (const char* rhs)
