@@ -62,7 +62,11 @@ Record::Record(std::ifstream &is)
     {
         ID_counter = ID;
     }
-    title = title_read(is);
+    if (!(is.get()))
+    {
+        throw_file_error();
+    }
+    getline(is, title);
 }
 
 // if the rating is not between 1 and 5 inclusive, an exception is thrown
