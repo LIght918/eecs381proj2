@@ -1,5 +1,4 @@
 #include <fstream>
-#include <iostream>
 #include <limits>
 #include "p2_globals.h"
 #include "Utility.h"
@@ -7,8 +6,6 @@
 #include "Collection.h"
 #include "Ordered_list.h"
 #include "String.h"
-
-using namespace std;
 
 /* Construct a Collection from an input file stream in save format, using the record list,
     restoring all the Record information.
@@ -21,7 +18,6 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     int num;
     if (!(is >> name >> num))
     {
-        cout << "blah!!!" << endl;
         throw_file_error();
     }
     for (int i = 0; i < num; i++)
@@ -30,10 +26,8 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
         String title = title_read(is);
         Record temp_record(title);
         auto record_it = library.find(&temp_record);
-        cout << "record in file is " << *(*record_it) << endl;
         if (record_it == library.end())
         {
-            cout << "no record found" << endl;
             throw_file_error();
         }
         elements.insert(*record_it);
