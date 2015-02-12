@@ -357,6 +357,7 @@ std::istream& operator>> (std::istream& is, String& str)
         char next;
         if (!(is.get(next)))
         {
+            if (is.eof()) break;
             throw String_exception(">> error");
         }
         std::cerr << next;
@@ -388,6 +389,7 @@ std::istream& getline(std::istream& is, String& str)
         char next;
         if (!(is.get(next)))
         {
+            if (is.eof()) break;
             throw String_exception("getline failure");
         }
         std::cerr << next;
