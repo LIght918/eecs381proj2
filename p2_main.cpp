@@ -212,7 +212,7 @@ int main()
                             Record *record_ptr = *record_iter;
                             library_title.erase(record_iter);
                             library_id.erase(library_id.find(record_ptr));
-                            cout << "Record " << record_ptr->get_ID() << " deleted";
+                            cout << "Record " << record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted";
                             delete record_ptr;
                             break;
                         }

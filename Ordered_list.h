@@ -306,7 +306,6 @@ private:
     Node *first;
     Node *last;
 
-    void deallocate_nodes();
     Ordered_list& copy(const Ordered_list& original) noexcept;
 };
 
@@ -431,7 +430,16 @@ Ordered_list<T, OF>::~Ordered_list<T, OF>()
 template<typename T, typename OF>
 void Ordered_list<T, OF>::clear() noexcept
 {
-    deallocate_nodes();
+    Node *node = first;
+    while (node != nullptr)
+    {
+        Node *next = node->next;
+        delete node;
+        node = next;
+    }
+    length = 0;
+    first = nullptr;
+    last = nullptr;
 }
 
 template<typename T, typename OF>
@@ -483,9 +491,10 @@ typename Ordered_list<T, OF>::Iterator Ordered_list<T, OF>::find(const T& probe_
     Node *node = first;
     while (node != nullptr)
     {
-        if (!ordering_f(node->datum, probe_datum) && !ordering_f(probe_datum, node->datum))
+        if (!ordering_f(node->datum, probe_datum))
         {
-            return Iterator(node);
+            if (!ordering_f(probe_datum, node->datum)) return Iterator(node);
+            break;
         }
         node = node->next;
     }
@@ -527,21 +536,6 @@ void Ordered_list<T, OF>::swap(Ordered_list & other) noexcept
     other.length = temp_length;
     other.first = temp_first;
     other.last = temp_last;
-}
-
-template<typename T, typename OF>
-void Ordered_list<T, OF>::deallocate_nodes()
-{
-    Node *node = first;
-    while (node != nullptr)
-    {
-        Node *next = node->next;
-        delete node;
-        node = next;
-    }
-    length = 0;
-    first = nullptr;
-    last = nullptr;
 }
 
 #endif
