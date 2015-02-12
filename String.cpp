@@ -305,19 +305,19 @@ void String::swap(String& other) noexcept
 // comparison is based on std::strcmp result compared to 0
 bool operator== (const String& lhs, const String& rhs)
 {
-    return strcmp(lhs.data, rhs.data) == 0;
+    return strcmp(lhs.c_str(), rhs.c_str()) == 0;
 }
 bool operator!= (const String& lhs, const String& rhs)
 {
-    return strcmp(lhs.data, rhs.data) != 0;
+    return strcmp(lhs.c_str(), rhs.c_str()) != 0;
 }
 bool operator< (const String& lhs, const String& rhs)
 {
-    return strcmp(lhs.data, rhs.data) < 0;
+    return strcmp(lhs.c_str(), rhs.c_str()) < 0;
 }
 bool operator> (const String& lhs, const String& rhs)
 {
-    return strcmp(lhs.data, rhs.data) > 0;
+    return strcmp(lhs.c_str(), rhs.c_str()) > 0;
 }
 
 /* Concatenate a String with another String.
