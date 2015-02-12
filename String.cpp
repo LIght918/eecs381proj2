@@ -31,7 +31,6 @@ char* String::allocate(int n)
     total_allocation += n;
     char* new_data = new char[n];
     memset(new_data, '\0', n);
-    std::cerr << new_data << std::endl;
     return new_data;
 }
 
@@ -43,7 +42,6 @@ void String::resize(int n)
     {
         allocation = n + 1;
         data = allocate(allocation);
-        std::cerr << data << std::endl;
         length = 0;
         return;
     }
@@ -266,24 +264,8 @@ final memory allocation. If the rhs is a null byte or an empty C-string or Strin
 no change is made to lhs String. */
 String& String::operator += (char rhs)
 {
-    std::cerr << "about to resize by 1" << std::endl;
-    std::cerr << allocation << std::endl;
-    std::cerr << length << std::endl;
-    for (int i = 0; i < allocation; i++)
-    {
-        std::cerr << (data[i] != '\0' ? data[i] : '0') << std::endl;
-    }
-    std::cerr << strlen(data) << std::endl;
     resize(1);
     data[length++] = rhs;
-    std::cerr << allocation << std::endl;
-    std::cerr << length << std::endl;
-    for (int i = 0; i < allocation; i++)
-    {
-        std::cerr << (data[i] != '\0' ? data[i] : '0') << std::endl;
-    }
-    std::cerr << strlen(data) << std::endl;
-    std::cerr << "done resize" << std::endl;
     return *this;
 }
 String& String::operator += (const char* rhs)
