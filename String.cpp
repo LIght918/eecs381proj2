@@ -61,14 +61,7 @@ void String::resize(int n)
 // copies the rhs into this string
 String& String::copy(const String& rhs)
 {
-    String temp;
-    if (rhs.allocation > 0)
-    {
-        temp.data = allocate(rhs.allocation);
-        memcpy(temp.data, rhs.data, rhs.allocation);
-        temp.allocation = rhs.allocation;
-        temp.length = rhs.length;
-    }
+    String temp(rhs.data);
     swap(temp);
     return *this;
 }
