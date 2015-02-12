@@ -159,6 +159,8 @@ int main()
                             String medium, title;
                             cin >> medium;
                             title = title_read();
+                            cerr << "finished reading title" << endl;
+                            cerr << "title is " << title << endl;
                             Record temp_record(title);
                             if (library_title.find(&temp_record) != library_title.end())
                             {
