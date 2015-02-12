@@ -399,6 +399,7 @@ std::istream& getline(std::istream& is, String& str)
             break;
         }
     }
+    std::cerr << "escaped getline" << std::endl;
     is.unget();
     return is;
 }
