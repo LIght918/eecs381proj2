@@ -8,6 +8,8 @@
 #include "Ordered_list.h"
 #include "String.h"
 
+using namespace std;
+
 /* Construct a Collection from an input file stream in save format, using the record list,
     restoring all the Record information.
     Record list is needed to resolve references to record members.
