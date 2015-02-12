@@ -19,17 +19,6 @@ bool String::messages_wanted = false;	// whether to output constructor/destructo
 // deallocates data
 void String::deconstruct()
 {
-    cerr << "deallocating " << allocation << endl;
-    cerr << "data (" << static_cast<void*>(data) << ") is ";
-    if (data == &a_null_byte || data == nullptr)
-    {
-        cerr << "null" << endl;
-    }
-    else
-    {
-        cerr << data << endl;
-    }
-    total_allocation -= allocation;
     if (data != nullptr && data != &a_null_byte)
     {
         delete[] data;
@@ -61,6 +50,7 @@ void String::resize(int n)
     assert(allocation > 0);
     if (allocation < length + n + 1)
     {
+        total_allocation -= allocation;
         allocation = 2 * (length + n + 1);
         char* new_data = allocate(allocation);
         strcpy(new_data, data);
@@ -133,6 +123,7 @@ String::~String() noexcept
         }
         cout << "\"\n"; // ***
     }
+    total_allocation -= allocation;
     deconstruct();
 }
 
