@@ -67,5 +67,5 @@ String parse_title(String& title_string)
     {
         title.remove(title.size() - 1, 1);
     }
-    return title;
+    return String(title);
 }
