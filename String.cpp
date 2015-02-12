@@ -226,7 +226,7 @@ The removed characters must be contained within the String.
 Valid values for i and len are the same as for substring. */
 void String::remove(int i, int len)
 {
-    if (i >= length || i + len >= length)
+    if (i >= length || i + len > length)
     {
         throw String_exception("Remove bounds invalid");
     }
