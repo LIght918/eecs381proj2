@@ -213,7 +213,7 @@ String String::substring(int i, int len) const
 // Set to an empty string with minimum allocation by create/swap with an empty string.
 void String::clear()
 {
-    copy("");
+    swap(String());
 }
 
 /* Remove the len characters starting at i; allocation is unchanged.
@@ -349,26 +349,31 @@ str is expanded as needed, and retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
 std::istream& operator>> (std::istream& is, String& str)
 {
+    cerr << "operator>>" << endl;
     str.clear();
+    cerr << "cleared" << endl;
     bool leading = true;
     bool trailing = false;
     while (leading || !trailing)
     {
+        cerr << "looping" << endl;
         char next;
         if (!(is >> next))
         {
             throw String_exception(">> error");
         }
+        cerr << "char is " << next << endl;
         if (!isspace(next))
         {
             str += next;
             leading = false;
-            trailing = false;
         }
         else
         {
             if (!leading) trailing = true;
         }
+        cerr << "leading = " << leading << endl;
+        cerr << "trailing = " << trailing << endl;
     }
     is.unget();
     return is;

@@ -401,7 +401,7 @@ int main()
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } catch (String_exception& e)
         {
-            cout << e.msg;
+            cout << e.msg << "\n";
             return 1;
         }
         cout << "\n";
