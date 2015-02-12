@@ -466,6 +466,7 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
         if (ordering_f(new_datum, node->datum))
         {
             Node *new_node = new Node(new_datum, node->prev, node);
+            if (node->prev != nullptr) node->prev->next = new_node;
             node->prev = new_node;
             return;
         }
