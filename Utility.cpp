@@ -46,6 +46,7 @@ String parse_title(String& title_string)
     while(is >> substring)
     {
         title += substring;
+        title += " ";
     }
-    return title;
+    return title.substring(0, title.size() - 1);
 }

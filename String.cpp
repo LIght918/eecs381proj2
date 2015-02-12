@@ -383,8 +383,8 @@ std::istream& getline(std::istream& is, String& str)
     str.clear();
     while (true)
     {
-        char next;
-        if (!(is.get(next)))
+        char next = '\n';
+        if (!(is.get(next)) && !is.eof())
         {
             throw String_exception("getline failure");
         }
