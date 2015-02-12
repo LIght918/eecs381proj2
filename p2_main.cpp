@@ -386,7 +386,7 @@ int main()
                         {
                             clear_libraries(library_title, library_id);
                             clear_catalog(catalog);
-                            cout << "All data deleted\nDone";
+                            cout << "All data deleted\nDone\n";
                             return 0;
                         }
                         default:
