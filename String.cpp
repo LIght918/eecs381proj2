@@ -27,7 +27,7 @@ void String::deconstruct()
     }
     else
     {
-        cerr << strlen(data) << endl;
+        cerr << data << endl;
     }
     total_allocation -= allocation;
     if (data != nullptr && data != &a_null_byte)
