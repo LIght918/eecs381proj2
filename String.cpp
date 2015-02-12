@@ -354,7 +354,6 @@ istream& operator>> (istream& is, String& str)
             if (is.eof()) break;
             throw String_exception(">> error");
         }
-        cerr << next;
         if (!isspace(next))
         {
             str += next;
@@ -386,7 +385,6 @@ istream& getline(istream& is, String& str)
             if (is.eof()) break;
             throw String_exception("getline failure");
         }
-        cerr << next;
         if (next != '\n')
         {
             str += next;
