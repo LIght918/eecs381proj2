@@ -32,7 +32,7 @@ String title_read()
         {
             throw String_exception("");
         }
-        return String(title);
+        return title;
     } catch (String_exception& e)
     {
         cerr << e.msg << "\n";
