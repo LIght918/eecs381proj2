@@ -29,7 +29,7 @@ void String::deconstruct()
 char* String::allocate(int n)
 {
     total_allocation += n;
-    return new char[n];
+    return new char[n + 1];
 }
 
 // resizes the string to handle if the length was increased by n characters
