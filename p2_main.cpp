@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <limits>
+#include <istream>
+#include <cctype>
 #include "String.h"
 #include "Ordered_list.h"
 #include "Record.h"
@@ -33,6 +35,9 @@ bool check_record_in_collection(Collection *collection, Record *record);
 
 void print_record(Record* record);
 void print_collection(Collection* collection);
+
+String title_read(istream &is);
+String parse_title(String& title_string);
 
 int main()
 {
@@ -513,4 +518,46 @@ void print_record(Record* record)
 void print_collection(Collection* collection)
 {
     cout << "\n" << *collection;
+}
+
+String title_read(istream &is)
+{
+    String title;
+    getline(is, title);
+    title = parse_title(title);
+    if (title.size() == 0)
+    {
+        throw Error("Could not read a title!");
+    }
+    return title;
+}
+
+String parse_title(String& title_string)
+{
+    String title(title_string);
+    for (int i = 0; i < title.size(); i++)
+    {
+        if (!isspace(title[i]))
+        {
+            title.remove(0, i);
+            break;
+        }
+    }
+    for (int i = 0; i < title.size(); i++)
+    {
+        if (isspace(title[i]))
+        {
+            int j;
+            for (j = i + 1; j < title.size() && isspace(title[j]); j++);
+            if (j != i + 1)
+            {
+                title.remove(i + 1, j - (i + 1));
+            }
+        }
+    }
+    if (title.size() > 0 && isspace(title[title.size() - 1]))
+    {
+        title.remove(title.size() - 1, 1);
+    }
+    return title;
 }
