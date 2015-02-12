@@ -94,7 +94,7 @@ String::String(const String& original)
     number++;
     if (messages_wanted)
     {
-        cout << "\n" << "Copy ctor: \"" << original << "\"";
+        cout << "Copy ctor: \"" << original << "\"\n";
     }
     copy(original);
 }
@@ -105,7 +105,7 @@ String::String(String&& original) noexcept
     number++;
     if (messages_wanted)
     {
-        cout << "\n" << "Move ctor: \"" << original << "\"";
+        cout << "Move ctor: \"" << original << "\"\n";
     }
     swap(original);
 }
@@ -115,7 +115,9 @@ String::~String() noexcept
     number--;
     if (messages_wanted)
     {
-        cout << "\n" << "Dtor: \"" << "\""; // ***
+        cerr << "dtor data is " << data << endl;
+        cerr << "dtor *this is " << *this << endl;
+        cout << "Dtor: \"" << "\"\n"; // ***
     }
     deconstruct();
 }
@@ -127,7 +129,7 @@ String& String::operator= (const String& rhs)
 {
     if (messages_wanted)
     {
-        cout << "\n" << "Copy assign from String:  \"" << rhs << "\"";
+        cout << "Copy assign from String:  \"" << rhs << "\"\n";
     }
     copy(rhs);
     return *this;
@@ -137,7 +139,7 @@ String& String::operator= (const char* rhs)
 {
     if (messages_wanted)
     {
-        cout << "\n" << "Assign from C-string:  \"" << rhs << "\"";
+        cout << "Assign from C-string:  \"" << rhs << "\"\n";
     }
     String temp(rhs);
     swap(temp);
@@ -148,7 +150,7 @@ String& String::operator= (String&& rhs) noexcept
 {
     if (messages_wanted)
     {
-        cout << "Move assign from String:  \"" << rhs << "\"" << endl;
+        cout << "Move assign from String:  \"" << rhs << "\"\n";
     }
     swap(rhs);
     return *this;
