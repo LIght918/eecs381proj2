@@ -23,22 +23,15 @@ int integer_read()
 
 String title_read()
 {
-    try
+    String title;
+    getline(cin, title);
+    String parsed_title = parse_title(title);
+    title = parsed_title;
+    if (title.size() == 0)
     {
-        String title;
-        getline(cin, title);
-        String parsed_title = parse_title(title);
-        title = parsed_title;
-        if (title.size() == 0)
-        {
-            throw String_exception("");
-        }
-        return title;
-    } catch (String_exception& e)
-    {
-        cerr << e.msg << "\n";
         throw Error("Could not read a title!");
     }
+    return title;
 }
 
 String parse_title(String& title_string)

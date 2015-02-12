@@ -22,20 +22,14 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     }
     for (int i = 0; i < num; i++)
     {
-        try
-        {
-            String title = title_read();
-            Record temp_record(title);
-            auto record_it = library.find(&temp_record);
-            if (record_it == library.end())
-            {
-                throw_file_error();
-            }
-            elements.insert(*record_it);
-        } catch (String_exception& e)
+        String title = title_read();
+        Record temp_record(title);
+        auto record_it = library.find(&temp_record);
+        if (record_it == library.end())
         {
             throw_file_error();
         }
+        elements.insert(*record_it);
     }
 }
 

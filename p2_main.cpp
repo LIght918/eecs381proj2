@@ -360,7 +360,7 @@ int main()
                             catch (Error& e)
                             {
                                 Record::restore_ID_counter();
-                                throw e;
+                                throw_file_error();
                             }
                             break;
                         }

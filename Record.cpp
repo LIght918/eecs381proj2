@@ -48,22 +48,15 @@ Record::Record(int ID_)
 // record ID if the saved record ID is larger than the static member variable value.
 Record::Record(std::ifstream &is)
 {
-    try
-    {
-        if (!(is >> ID >> medium >> rating))
-        {
-            throw_file_error();
-        }
-        if (ID > ID_counter)
-        {
-            ID_counter = ID;
-        }
-        title = title_read();
-    }
-    catch (String_exception& e)
+    if (!(is >> ID >> medium >> rating))
     {
         throw_file_error();
     }
+    if (ID > ID_counter)
+    {
+        ID_counter = ID;
+    }
+    title = title_read();
 }
 
 // if the rating is not between 1 and 5 inclusive, an exception is thrown
