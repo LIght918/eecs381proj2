@@ -38,7 +38,7 @@ void String::resize(int n)
     assert(n > 0);
     if (allocation == 0)
     {
-        allocation = n + 1;
+        allocation = n;
         data = allocate(allocation);
         length = 0;
         return;
