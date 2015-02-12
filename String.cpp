@@ -19,6 +19,16 @@ bool String::messages_wanted = false;	// whether to output constructor/destructo
 // deallocates data
 void String::deconstruct()
 {
+    cerr << "deallocating " << allocation << endl;
+    cerr << "data is ";
+    if (data == &a_null_byte)
+    {
+        cerr << "null" << endl;
+    }
+    else
+    {
+        cerr << strlen(data) << endl;
+    }
     total_allocation -= allocation;
     if (data != nullptr && data != &a_null_byte)
     {
@@ -31,6 +41,7 @@ void String::deconstruct()
 char* String::allocate(int n)
 {
     total_allocation += n;
+    cerr << "allocating " << n << endl;
     char* new_data = new char[n];
     memset(new_data, '\0', n);
     return new_data;
