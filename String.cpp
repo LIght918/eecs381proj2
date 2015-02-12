@@ -43,7 +43,7 @@ void String::resize(int n)
         allocation = n + 1;
         return;
     }
-    assert(allocation > 0 && length > 0);
+    assert(allocation > 0 && data != nullptr && data != &a_null_byte);
     if (allocation < length + n + 1)
     {
         allocation = 2 * (length + n + 1);
