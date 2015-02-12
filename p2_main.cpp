@@ -360,6 +360,8 @@ int main()
                             }
                             catch (Error& e)
                             {
+                                clear_catalog(new_catalog);
+                                clear_libraries(new_library_title, new_library_id);
                                 Record::restore_ID_counter();
                                 throw_file_error();
                             }
