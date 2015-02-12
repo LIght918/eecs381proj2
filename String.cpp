@@ -115,7 +115,7 @@ String::~String() noexcept
     number--;
     if (messages_wanted)
     {
-        cout << "Dtor: \"" << *this << "\"" << endl;
+        cout << "Dtor: \"" << data << "\"" << endl;
     }
     deconstruct();
 }
