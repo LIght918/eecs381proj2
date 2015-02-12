@@ -265,10 +265,18 @@ String& String::operator += (char rhs)
     std::cerr << "about to resize by 1" << std::endl;
     std::cerr << allocation << std::endl;
     std::cerr << length << std::endl;
+    for (int i = 0; i < allocation; i++)
+    {
+        std::cerr << (data[i] != '\0' ? data[i] : "0") << std::endl;
+    }
     resize(1);
     data[length++] = rhs;
     std::cerr << allocation << std::endl;
     std::cerr << length << std::endl;
+    for (int i = 0; i < allocation; i++)
+    {
+        std::cerr << (data[i] != '\0' ? data[i] : "0") << std::endl;
+    }
     std::cerr << "done resize" << std::endl;
     return *this;
 }
