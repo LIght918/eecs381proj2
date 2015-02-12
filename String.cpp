@@ -47,20 +47,15 @@ char* String::allocate(int n)
 void String::resize(int n)
 {
     assert(n > 0);
-    if (allocation == 0)
-    {
-        allocation = n + 1;
-        data = allocate(allocation);
-        length = 0;
-        return;
-    }
-    assert(allocation > 0);
     if (allocation < length + n + 1)
     {
         int new_alloc = 2 * (length + n + 1);
         int old_length = length;
         char* new_data = allocate(new_alloc);
-        strcpy(new_data, data);
+        if (allocation > 0)
+        {
+            strcpy(new_data, data);
+        }
         deconstruct();
         data = new_data;
         allocation = new_alloc;
