@@ -23,7 +23,8 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     for (int i = 0; i < num; i++)
     {
         is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-        String title = title_read(is);
+        String title;
+        getline(is, title);
         Record temp_record(title);
         auto record_it = library.find(&temp_record);
         if (record_it == library.end())
