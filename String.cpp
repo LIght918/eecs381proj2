@@ -214,6 +214,7 @@ void String::remove(int i, int len)
     }
     memmove(data + i, data + i + len, length - (i + len));
     length -= len;
+    data[length + 1] = '\0';
 }
 
 /* Insert the supplied source String before character i of this String,
