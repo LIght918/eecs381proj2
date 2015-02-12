@@ -438,7 +438,7 @@ template<typename T, typename OF>
 void Ordered_list<T, OF>::insert(const T& new_datum)
 {
     T data = new_datum;
-    insert(data);
+    insert(std::move(data));
 }
 
 template<typename T, typename OF>
