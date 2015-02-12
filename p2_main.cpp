@@ -397,11 +397,11 @@ int main()
             }
         } catch (Error& e)
         {
-            cout << e.msg << "\n";
+            cout << e.msg;
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } catch (String_exception& e)
         {
-            cout << e.msg << "\n";
+            cout << e.msg;
             return 1;
         }
         cout << "\n";
