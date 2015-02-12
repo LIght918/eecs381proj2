@@ -213,7 +213,8 @@ String String::substring(int i, int len) const
 // Set to an empty string with minimum allocation by create/swap with an empty string.
 void String::clear()
 {
-    swap(String());
+    String empty();
+    swap(empty);
 }
 
 /* Remove the len characters starting at i; allocation is unchanged.
@@ -349,20 +350,20 @@ str is expanded as needed, and retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
 std::istream& operator>> (std::istream& is, String& str)
 {
-    cerr << "operator>>" << endl;
+    std::cerr << "operator>>" << std::endl;
     str.clear();
-    cerr << "cleared" << endl;
+    std::cerr << "cleared" << std::endl;
     bool leading = true;
     bool trailing = false;
     while (leading || !trailing)
     {
-        cerr << "looping" << endl;
+        std::cerr << "looping" << std::endl;
         char next;
         if (!(is >> next))
         {
             throw String_exception(">> error");
         }
-        cerr << "char is " << next << endl;
+        std::cerr << "char is " << next << std::endl;
         if (!isspace(next))
         {
             str += next;
@@ -372,10 +373,12 @@ std::istream& operator>> (std::istream& is, String& str)
         {
             if (!leading) trailing = true;
         }
-        cerr << "leading = " << leading << endl;
-        cerr << "trailing = " << trailing << endl;
+        std::cerr << "leading = " << leading << std::endl;
+        std::cerr << "trailing = " << trailing << std::endl;
     }
+    std::cerr << "out" << std::endl;
     is.unget();
+    std::cerr << "returning" << std::endl;
     return is;
 }
 
