@@ -2,6 +2,7 @@
 #include "String.h"
 #include <sstream>
 #include <iostream>
+#include <cctype>
 
 using namespace std;
 
@@ -41,21 +42,22 @@ String title_read()
 
 String parse_title(String& title_string)
 {
-    istringstream is(title_string.c_str());
-    String title, substring;
-    cerr << "declared" << endl;
-    while(is >> substring)
+    String title(title_string);
+    for (int i = 0; i < title.size(); i++)
     {
-        cerr << "before +=" << endl;
-        title += substring;
-        cerr << "after +=" << endl;
+        if (isspace(title[i]))
+        {
+            int j;
+            for (j = i + 1; j < title.size() && isspace(title[j]); j++);
+            if (j != i + 1)
+            {
+                title.remove(i + 1, j - (i + 1));
+            }
+        }
     }
-    if (title.size() == 0)
+    if (isspace(title[title.size() - 1]))
     {
-        return String();
+        title.remove(title.size() - 1, 1);
     }
-    title.remove(title.size() - 1, 1);
-    cerr << "printing parsed title" << endl;
-    cerr << title << endl;
     return title;
 }
