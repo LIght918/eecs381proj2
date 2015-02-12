@@ -53,5 +53,7 @@ String parse_title(String& title_string)
         return String();
     }
     title.remove(title.size() - 1, 1);
+    cerr << "printing parsed title" << endl;
+    cerr << title << endl;
     return title;
 }
