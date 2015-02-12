@@ -55,7 +55,7 @@ void String::resize(int n)
 }
 
 // copies the rhs into this string
-String& String::copy(String& rhs)
+String& String::copy(const String& rhs)
 {
     deconstruct();
     if (rhs.length > 0)
@@ -100,7 +100,7 @@ String::String(const char* cstr_)
     number++;
     if (messages_wanted)
     {
-        std::cout << "Ctor: \"" + cstr_ + "\"";
+        std::cout << "Ctor: \"" << cstr_ << "\"";
     }
     copy(rhs);
 }
@@ -111,7 +111,7 @@ String::String(const String& original)
     number++;
     if (messages_wanted)
     {
-        std::cout << "Copy ctor: \"" + original + "\"";
+        std::cout << "Copy ctor: \"" << original << "\"";
     }
     copy(original);
 }
@@ -122,7 +122,7 @@ String::String(String&& original) noexcept
     number++;
     if (messages_wanted)
     {
-        std::cout << "Move ctor: \"" + original + "\"";
+        std::cout << "Move ctor: \"" << original << "\"";
     }
     swap(original);
 }
@@ -140,7 +140,7 @@ String& String::operator= (const String& rhs)
 {
     if (messages_wanted)
     {
-        std::cout << "Copy assign from String:  \"" + rhs + "\"";
+        std::cout << "Copy assign from String:  \"" << rhs << "\"";
     }
     copy(rhs);
     return *this;
@@ -150,7 +150,7 @@ String& String::operator= (const char* rhs)
 {
     if (messages_wanted)
     {
-        std::cout << "Assign from C-string:  \"" + rhs + "\"";
+        std::cout << "Assign from C-string:  \"" << rhs << "\"";
     }
     String temp(rhs);
     swap(temp);
@@ -161,7 +161,7 @@ String& String::operator= (String&& rhs) noexcept
 {
     if (messages_wanted)
     {
-        std::cout << "Move assign from String:  \"" + rhs + "\"";
+        std::cout << "Move assign from String:  \"" << rhs << "\"";
     }
     swap(rhs);
     return *this;

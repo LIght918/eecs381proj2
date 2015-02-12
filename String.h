@@ -169,7 +169,7 @@ private:
 
     void check_subscript(int i); // checks the subscript i and throws errors if i is out of bounds
 
-    String& copy(String& rhs); // copies the rhs into this string
+    String& copy(const String& rhs); // copies the rhs into this string
     String& copy(const char* rhs); // copies rhs into this string
 	
 	static char a_null_byte;	// to hold a null byte for empty string representation
