@@ -115,7 +115,7 @@ String::~String() noexcept
     number--;
     if (messages_wanted)
     {
-        cout << "Dtor: \"" << data << "\"" << endl;
+        cout << "Dtor: \"" << *this << "\"" << endl;
     }
     deconstruct();
 }
@@ -212,7 +212,7 @@ void String::remove(int i, int len)
     {
         throw String_exception("Remove bounds invalid");
     }
-    strcpy(data + i, data + i + len);
+    memmove(data + i, data + i + len, length - (i + len));
     length -= len;
 }
 
