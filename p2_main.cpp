@@ -342,13 +342,18 @@ int main()
                                     Record *record_ptr = new Record(file);
                                     new_library_title.insert(record_ptr);
                                     new_library_id.insert(record_ptr);
+                                    cout << "read record " << *record_ptr << "\n";
                                     num--;
                                 }
-                                file >> num;
+                                if (!(file >> num))
+                                {
+                                    throw_file_error();
+                                }
                                 while (num > 0)
                                 {
                                     Collection *collection_ptr = new Collection(file, new_library_title);
                                     new_catalog.insert(collection_ptr);
+                                    cout << "read collection " << *collection_ptr << "\n";
                                     num--;
                                 }
                                 clear_libraries(library_title, library_id);
