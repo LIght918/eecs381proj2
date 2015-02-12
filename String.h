@@ -167,7 +167,7 @@ private:
     char* allocate(int n); // allocates a new char * and keeps track of total_allocation
     void resize(int n); // resizes the string to handle if the length was increased by n characters
 
-    void check_subscript(int i); // checks the subscript i and throws errors if i is out of bounds
+    void check_subscript(int i) const; // checks the subscript i and throws errors if i is out of bounds
 
     String& copy(const String& rhs); // copies the rhs into this string
     String& copy(const char* rhs); // copies rhs into this string

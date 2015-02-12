@@ -170,7 +170,7 @@ String& String::operator= (String&& rhs) noexcept
 // Accesssors
 
 // checks the subscript i and throws errors if i is out of bounds
-void String::check_subscript(int i)
+void String::check_subscript(int i) const
 {
     if (i < 0 || i >= length)
     {
@@ -182,12 +182,12 @@ void String::check_subscript(int i)
 char& String::operator[] (int i)
 {
     check_subscript(i);
-    return &data[i];
+    return data[i];
 }
 const char& String::operator[] (int i) const    // const version for const Strings
 {
     check_subscript(i);
-    return &data[i];
+    return data[i];
 }
 
 
@@ -199,7 +199,7 @@ If both i = size and len = 0, the input is valid and the result is an empty stri
 Throw exception if the input is invalid. */
 String String::substring(int i, int len) const
 {
-    if (!(i >= 0 && len >= 0 && i <= size && (i + len) <= size))
+    if (!(i >= 0 && len >= 0 && i <= length && (i + len) <= length))
     {
         throw String_exception("Substring bounds invalid");
     }
