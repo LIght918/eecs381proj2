@@ -495,8 +495,8 @@ template<typename T, typename OF>
 void Ordered_list<T, OF>::erase(Iterator it) noexcept
 {
     length--;
-    if (it.node_ptr->prev != null) it.node_ptr->prev->next = it.node_ptr->next;
-    if (it.node_ptr->next != null) it.node_ptr->next->prev = it.node_ptr->prev;
+    if (it.node_ptr->prev != nullptr) it.node_ptr->prev->next = it.node_ptr->next;
+    if (it.node_ptr->next != nullptr) it.node_ptr->next->prev = it.node_ptr->prev;
     delete it.node_ptr;
 }
 
