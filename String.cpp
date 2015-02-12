@@ -269,6 +269,7 @@ String& String::operator += (char rhs)
     {
         std::cerr << (data[i] != '\0' ? data[i] : '0') << std::endl;
     }
+    std::cerr << strlen(data) << std::endl;
     resize(1);
     data[length++] = rhs;
     std::cerr << allocation << std::endl;
@@ -277,6 +278,7 @@ String& String::operator += (char rhs)
     {
         std::cerr << (data[i] != '\0' ? data[i] : '0') << std::endl;
     }
+    std::cerr << strlen(data) << std::endl;
     std::cerr << "done resize" << std::endl;
     return *this;
 }
