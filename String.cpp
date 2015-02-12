@@ -102,7 +102,7 @@ String::String(const char* cstr_)
     {
         std::cout << "Ctor: \"" << cstr_ << "\"";
     }
-    copy(rhs);
+    copy(cstr_);
 }
 // The copy constructor initializes this String with the original's data,
 // and gets minimum allocation.
@@ -127,7 +127,7 @@ String::String(String&& original) noexcept
     swap(original);
 }
 // deallocate C-string memory
-~String::String() noexcept
+String::~String() noexcept
 {
     number--;
     deconstruct();
@@ -168,15 +168,6 @@ String& String::operator= (String&& rhs) noexcept
 }
 
 // Accesssors
-// Return a pointer to the internal C-string
-const char* String::c_str() const
-{return data;}
-// Return size (length) of internal C-string in this String
-int String::size() const
-{return length;}
-// Return current allocation for this String
-int String::get_allocation() const
-{return allocation;}
 
 // checks the subscript i and throws errors if i is out of bounds
 void String::check_subscript(int i)
