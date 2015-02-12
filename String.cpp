@@ -59,7 +59,7 @@ void String::resize(int n)
 // copies the rhs into this string
 String& String::copy(const String& rhs)
 {
-    String temp();
+    String temp;
     if (rhs.allocation > 0)
     {
         temp.data = allocate(rhs.allocation);
@@ -74,7 +74,7 @@ String& String::copy(const String& rhs)
 // copies the rhs into this string
 String& String::copy(const char* rhs)
 {
-    String temp();
+    String temp;
     int cstrlength = strlen(rhs);
     if (cstrlength > 0)
     {
