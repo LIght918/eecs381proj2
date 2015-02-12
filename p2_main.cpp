@@ -58,7 +58,7 @@ int main()
                         case 'r': /* find record */
                         {
                             auto record_ptr = read_title_get_record(library_title);
-                            cout << *record_ptr;
+                            cout << *record_ptr << "\n";
                             break;
                         }
                         default:
@@ -76,25 +76,26 @@ int main()
                         case 'r': /* print record */
                         {
                             Record *record_ptr = read_id_get_record(library_id);
-                            cout << *record_ptr;
+                            cout << *record_ptr << "\n";
                             break;
                         }
                         case 'c': /* print collection */
                         {
                             Collection *collection_ptr = read_name_get_collection(catalog);
-                            cout << *collection_ptr;
+                            cout << *collection_ptr << "\n";
                             break;
                         }
                         case 'L': /* print library */
                         {
                             if (library_title.empty())
                             {
-                                cout << "Library is empty";
+                                cout << "Library is empty" << "\n";
                             }
                             else
                             {
                                 cout << "Library contains " << library_title.size() << " records:";
                                 apply(library_title.begin(), library_title.end(), print_record);
+                                cout << "\n";
                             }
                             break;
                         }
@@ -108,6 +109,7 @@ int main()
                             {
                                 cout << "Catalog contains " << catalog.size() << " collections:";
                                 apply(catalog.begin(), catalog.end(), print_collection);
+                                cout << "\n";
                             }
                             break;
                         }
@@ -118,7 +120,7 @@ int main()
                             cout << "Collections: " << catalog.size() << "\n";
                             cout << "Lists: " << g_Ordered_list_count << "\n";
                             cout << "List Nodes: " << g_Ordered_list_Node_count << "\n";
-                            cout << "Strings: " << String::get_number() << " with " << String::get_total_allocation() << " bytes total";
+                            cout << "Strings: " << String::get_number() << " with " << String::get_total_allocation() << " bytes total\n";
                             break;
                         }
                         default:
@@ -138,7 +140,7 @@ int main()
                             Record *record_ptr = read_id_get_record(library_id);
                             int rating = integer_read();
                             record_ptr->set_rating(rating);
-                            cout << "Rating for record " << record_ptr->get_ID() << " changed to " << rating;
+                            cout << "Rating for record " << record_ptr->get_ID() << " changed to " << rating << "\n";
                             break;
                         }
                         default:
@@ -166,7 +168,7 @@ int main()
                             Record *record = new Record(medium, title);
                             library_id.insert(record);
                             library_title.insert(record);
-                            cout << "Record " << record->get_ID() << " added";
+                            cout << "Record " << record->get_ID() << " added\\n";
                             break;
                         }
                         case 'c': /* add collection */
@@ -179,7 +181,7 @@ int main()
                                 throw Error("Catalog already has a collection with this name!");
                             }
                             catalog.insert(new Collection(name));
-                            cout << "Collection " << name << " added";
+                            cout << "Collection " << name << " added\n";
                             break;
                         }
                         case 'm': /* add record to collection */
@@ -187,7 +189,7 @@ int main()
                             Collection *collection_ptr = read_name_get_collection(catalog);
                             Record *record_ptr = read_id_get_record(library_id);
                             collection_ptr->add_member(record_ptr);
-                            cout << "Member " << record_ptr->get_ID() << " " << record_ptr->get_title() << " added";
+                            cout << "Member " << record_ptr->get_ID() << " " << record_ptr->get_title() << " added\n";
                             break;
                         }
                         default:
@@ -212,7 +214,7 @@ int main()
                             Record *record_ptr = *record_iter;
                             library_title.erase(record_iter);
                             library_id.erase(library_id.find(record_ptr));
-                            cout << "Record " << record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted";
+                            cout << "Record " << record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted\n";
                             delete record_ptr;
                             break;
                         }
@@ -221,7 +223,7 @@ int main()
                             auto collection_iter = read_name_get_iter(catalog);
                             Collection *collection_ptr = *collection_iter;
                             catalog.erase(collection_iter);
-                            cout << "Collection " << collection_ptr->get_name() << " deleted";
+                            cout << "Collection " << collection_ptr->get_name() << " deleted\n";
                             delete collection_ptr;
                             break;
                         }
@@ -230,7 +232,7 @@ int main()
                             Collection *collection_ptr = read_name_get_collection(catalog);
                             Record *record_ptr = read_title_get_record(library_title);
                             collection_ptr->remove_member(record_ptr);
-                            cout << "Member " << record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted";
+                            cout << "Member " << record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted\n";
                             break;
                         }
                         default:
@@ -253,13 +255,13 @@ int main()
                             }
                             Record::reset_ID_counter();
                             clear_libraries(library_title, library_id);
-                            cout << "All records deleted";
+                            cout << "All records deleted\n";
                             break;
                         }
                         case 'C': /* clear catalog */
                         {
                             clear_catalog(catalog);
-                            cout << "All collections deleted";
+                            cout << "All collections deleted\n";
                             break;
                         }
                         case 'A': /* clear all */
@@ -267,7 +269,7 @@ int main()
                             Record::reset_ID_counter();
                             clear_libraries(library_title, library_id);
                             clear_catalog(catalog);
-                            cout << "All data deleted";
+                            cout << "All data deleted\n";
                             break;
                         }
                         default:
@@ -302,7 +304,7 @@ int main()
                                 (*catalog_iter)->save(file);
                             }
                             file.close();
-                            cout << "Data saved";
+                            cout << "Data saved\n";
                             break;
                         }
                         default:
@@ -354,7 +356,7 @@ int main()
                                 library_title = new_library_title;
                                 library_id = new_library_id;
                                 catalog = new_catalog;
-                                cout << "Data loaded";
+                                cout << "Data loaded\n";
                             }
                             catch (Error& e)
                             {
@@ -396,14 +398,13 @@ int main()
             }
         } catch (Error& e)
         {
-            cout << e.msg;
+            cout << e.msg << "\n";
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } catch (String_exception& e)
         {
             cout << e.msg << "\n";
             return 1;
         }
-        cout << "\n";
     }
 }
 
