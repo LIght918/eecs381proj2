@@ -411,7 +411,9 @@ int main()
         } catch (Error& e)
         {
             cout << e.msg << "\n";
-            cerr << action << "\t" << object << "\n";
+            cerr << cin.get() << "\t" << cin.get() << "\n";
+            cin.unget();
+            cin.unget();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } catch (String_exception& e)
         {
