@@ -88,6 +88,9 @@ void Record::save(std::ostream &os) const
 // If the rating is zero, a 'u' is printed instead of the rating.
 std::ostream& operator<< (std::ostream& os, const Record& record)
 {
-    os << record.ID << ": " << record.medium << " " << (record.rating != 0 ? record.rating : 'u') << " " << record.title;
+    os << record.ID << ": " << record.medium << " ";
+    if (record.rating == 0) os << 'u';
+    else os << record.rating;
+    os << " " << record.title;
     return os;
 }
