@@ -115,6 +115,7 @@ String::~String() noexcept
     number--;
     if (messages_wanted)
     {
+        cerr << "string size = " << size() << endl;
         cerr << "dtor data is " << data << endl;
         cerr << "dtor *this is " << *this << endl;
         cout << "Dtor: \"" << "\"\n"; // ***
