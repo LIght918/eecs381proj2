@@ -69,11 +69,13 @@ void String::resize(int n)
     if (allocation < length + n + 1)
     {
         int new_alloc = 2 * (length + n + 1);
+        int old_length = length;
         char* new_data = allocate(new_alloc);
         strcpy(new_data, data);
         deconstruct();
         data = new_data;
         allocation = new_alloc;
+        length = old_length;
     }
     cout << "data is now " << data << endl;
 }
