@@ -359,6 +359,7 @@ std::istream& operator>> (std::istream& is, String& str)
         {
             throw String_exception(">> error");
         }
+        std::cerr << next;
         if (!isspace(next))
         {
             str += next;
