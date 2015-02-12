@@ -11,19 +11,19 @@ void throw_file_error()
 int integer_read()
 {
     int integer;
-    if (!(cin >> integer))
+    if (!(std::cin >> integer))
     {
         throw Error("Could not read an integer value!");
     }
     return integer;
 }
 
-String& title_read()
+String title_read()
 {
     try
     {
         String title;
-        getline(cin, title);
+        getline(std::cin, title);
         parse_title(title);
         if (title.size() == 0)
         {
@@ -36,7 +36,7 @@ String& title_read()
     }
 }
 
-String& parse_title(String& title_string)
+String parse_title(String& title_string)
 {
     istringstream is(title_string.c_str());
     String title;

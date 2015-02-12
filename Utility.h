@@ -17,8 +17,8 @@ void throw_file_error();
 
 int integer_read();
 
-String& title_read();
+String title_read();
 
-String& parse_title(String& title_string);
+String parse_title(String& title_string);
 
 #endif
