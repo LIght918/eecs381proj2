@@ -34,6 +34,7 @@ String title_read()
         return title;
     } catch (String_exception& e)
     {
+        cerr << e.msg << "\n";
         throw Error("Could not read a title!");
     }
 }
