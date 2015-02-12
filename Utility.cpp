@@ -3,6 +3,8 @@
 #include <sstream>
 #include <iostream>
 
+using namespace std;
+
 void throw_file_error()
 {
     throw Error("Invalid data found in file!");
@@ -11,7 +13,7 @@ void throw_file_error()
 int integer_read()
 {
     int integer;
-    if (!(std::cin >> integer))
+    if (!(cin >> integer))
     {
         throw Error("Could not read an integer value!");
     }
@@ -23,7 +25,7 @@ String title_read()
     try
     {
         String title;
-        getline(std::cin, title);
+        getline(cin, title);
         parse_title(title);
         if (title.size() == 0)
         {
