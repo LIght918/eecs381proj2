@@ -25,8 +25,8 @@ Ordered_list<Record*, record_id_comp>::Iterator read_id_get_iter(Ordered_list<Re
 Collection* read_name_get_collection(Ordered_list<Collection*, Less_than_ptr<Collection*>>& catalog);
 Ordered_list<Collection*, Less_than_ptr<Collection*>>::Iterator read_name_get_iter(Ordered_list<Collection*, Less_than_ptr<Collection*>>& catalog);
 
-void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>> library_title, Ordered_list<Record*, record_id_comp> library_id);
-void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>> catalog);
+void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title, Ordered_list<Record*, record_id_comp>& library_id);
+void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>>& catalog);
 
 bool check_collection_not_empty(Collection *collection);
 bool check_record_in_collection(Collection *collection, Record *record);
@@ -465,7 +465,7 @@ Ordered_list<Collection*, Less_than_ptr<Collection*>>::Iterator read_name_get_it
     return collection_iter;
 }
 
-void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>> library_title, Ordered_list<Record*, record_id_comp> library_id)
+void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title, Ordered_list<Record*, record_id_comp>& library_id)
 {
     auto title_iter = library_title.begin();
     while (title_iter != library_title.end())
@@ -477,7 +477,7 @@ void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>> library_title
     library_id.clear();
 }
 
-void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>> catalog)
+void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>>& catalog)
 {
     auto catalog_iter = catalog.begin();
     while (catalog_iter != catalog.end())

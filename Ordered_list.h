@@ -373,12 +373,12 @@ Ordered_list<T, OF>::Ordered_list()
 template<typename T, typename OF>
 Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& original) noexcept
 {
-    clear();
-    length = original.length;
-    if (length != 0)
+    Ordered_list<T, OF> temp;
+    if (original.length > 0)
     {
+        temp.length = original.length;
         Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
-        first = clone_node;
+        temp.first = clone_node;
         Node *node = original.first->next;
         while (node != nullptr)
         {
@@ -387,8 +387,9 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
             clone_node = new_node;
             node = node->next;
         }
-        last = clone_node;
+        temp.last = clone_node;
     }
+    swap(temp);
     return *this;
 }
 
