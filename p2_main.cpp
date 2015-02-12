@@ -384,7 +384,9 @@ int main()
                     {
                         case 'q': /* quit */
                         {
-                            cout << "Done";
+                            clear_libraries(library_title, library_id);
+                            clear_catalog(catalog);
+                            cout << "All data deleted\nDone";
                             return 0;
                         }
                         default:
