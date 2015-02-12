@@ -250,7 +250,7 @@ void String::insert_before(int i, const String& src)
     }
     resize(src.length);
     memmove(data + i + src.length, data + i, length - i);
-    strcpy(data + i, src.data, src.length);
+    strncpy(data + i, src.data, src.length);
     length += src.length;
 }
 
@@ -264,6 +264,7 @@ String& String::operator += (char rhs)
 {
     resize(1);
     data[length++] = rhs;
+    return *this;
 }
 String& String::operator += (const char* rhs)
 {
@@ -271,12 +272,14 @@ String& String::operator += (const char* rhs)
     resize(added_size);
     strcpy(data + length, rhs);
     length += added_size;
+    return *this;
 }
 String& String::operator += (const String& rhs)
 {
     resize(rhs.length);
     strcpy(data + length, rhs.data);
     length += rhs.length;
+    return *this;
 }
 
 /* Swap the contents of this String with another one.
