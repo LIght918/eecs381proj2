@@ -297,10 +297,9 @@ int main()
                                 record->save(file);
                             }
                             file << catalog.size() << "\n";
-                            for (auto catalog_iter = catalog.begin(); catalog_iter != catalog.end(); catalog_iter++)
+                            for (auto catalog_iter = catalog.begin(); catalog_iter != catalog.end(); ++catalog_iter)
                             {
                                 (*catalog_iter)->save(file);
-                                catalog_iter++;
                             }
                             file.close();
                             cout << "Data saved";
@@ -471,7 +470,7 @@ void clear_libraries(Ordered_list<Record*, Less_than_ptr<Record*>>& library_titl
     while (title_iter != library_title.end())
     {
         delete *title_iter;
-        title_iter++;
+        ++title_iter;
     }
     library_title.clear();
     library_id.clear();
@@ -483,7 +482,7 @@ void clear_catalog(Ordered_list<Collection*, Less_than_ptr<Collection*>>& catalo
     while (catalog_iter != catalog.end())
     {
         delete *catalog_iter;
-        catalog_iter++;
+        ++catalog_iter;
     }
     catalog.clear();
 }

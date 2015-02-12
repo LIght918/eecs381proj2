@@ -62,7 +62,7 @@ void Collection::remove_member(Record* record_ptr)
 void Collection::save(std::ostream& os) const
 {
     os << name << " " << elements.size();
-    for (auto it = elements.begin(); it != elements.end(); it++)
+    for (auto it = elements.begin(); it != elements.end(); ++it)
     {
         os << "\n" << (*it)->get_title();
     }
@@ -79,7 +79,7 @@ std::ostream& operator<< (std::ostream& os, const Collection& collection)
     }
     else
     {
-        for (auto it = collection.elements.begin(); it != collection.elements.end(); it++)
+        for (auto it = collection.elements.begin(); it != collection.elements.end(); ++it)
         {
             os << "\n" << *(*it);
         }
