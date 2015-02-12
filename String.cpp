@@ -83,11 +83,11 @@ String::String(const char* cstr_)
     data = &a_null_byte;
     allocation = 0;
     length = 0;
-    int cstrlength = strlen(rhs);
+    int cstrlength = strlen(cstr_);
     if (cstrlength > 0)
     {
         data = allocate(cstrlength + 1);
-        strcpy(temp.data, rhs);
+        strcpy(data, cstr_);
         length = cstrlength;
         allocation = length + 1;
     }
