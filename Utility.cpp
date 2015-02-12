@@ -27,12 +27,12 @@ String title_read()
     {
         String title;
         getline(cin, title);
-        title(parse_title(title));
+        title = parse_title(title);
         if (title.size() == 0)
         {
             throw String_exception("");
         }
-        return title;
+        return String(title);
     } catch (String_exception& e)
     {
         cerr << e.msg << "\n";
