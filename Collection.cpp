@@ -24,7 +24,6 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
         cout << "blah!!!" << endl;
         throw_file_error();
     }
-    is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
     for (int i = 0; i < num; i++)
     {
         String title = title_read(is);
