@@ -19,6 +19,7 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     int num;
     if (!(is >> name >> num))
     {
+        cout << "blah!!!" << endl;
         throw_file_error();
     }
     is.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -27,8 +28,10 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
         String title = title_read(is);
         Record temp_record(title);
         auto record_it = library.find(&temp_record);
+        cout << "record in file is " << *(*record_it) << endl;
         if (record_it == library.end())
         {
+            cout << "no record found" << endl;
             throw_file_error();
         }
         elements.insert(*record_it);
