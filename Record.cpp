@@ -56,7 +56,7 @@ Record::Record(std::ifstream &is)
     {
         ID_counter = ID;
     }
-    title = title_read();
+    title = title_read(is);
 }
 
 // if the rating is not between 1 and 5 inclusive, an exception is thrown

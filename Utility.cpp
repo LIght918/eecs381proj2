@@ -1,6 +1,6 @@
 #include "Utility.h"
 #include "String.h"
-#include <sstream>
+#include <istream>
 #include <iostream>
 #include <cctype>
 
@@ -21,10 +21,10 @@ int integer_read()
     return integer;
 }
 
-String title_read()
+String title_read(istream &is)
 {
     String title;
-    getline(cin, title);
+    getline(is, title);
     String parsed_title = parse_title(title);
     title = parsed_title;
     if (title.size() == 0)

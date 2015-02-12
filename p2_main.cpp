@@ -159,7 +159,7 @@ int main()
                         {
                             String medium, title;
                             cin >> medium;
-                            title = title_read();
+                            title = title_read(cin);
                             Record temp_record(title);
                             if (library_title.find(&temp_record) != library_title.end())
                             {
@@ -420,7 +420,7 @@ Record* read_title_get_record(Ordered_list<Record*, Less_than_ptr<Record*>>& lib
 
 Ordered_list<Record*, Less_than_ptr<Record*>>::Iterator read_title_get_iter(Ordered_list<Record*, Less_than_ptr<Record*>>& library_title)
 {
-    String title = title_read();
+    String title = title_read(cin);
     Record temp_record(title);
     auto record_iter = library_title.find(&temp_record);
     if (record_iter == library_title.end())

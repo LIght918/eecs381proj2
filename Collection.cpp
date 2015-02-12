@@ -22,7 +22,7 @@ Collection::Collection(std::ifstream& is, const Ordered_list<Record*, Less_than_
     }
     for (int i = 0; i < num; i++)
     {
-        String title = title_read();
+        String title = title_read(is);
         Record temp_record(title);
         auto record_it = library.find(&temp_record);
         if (record_it == library.end())
