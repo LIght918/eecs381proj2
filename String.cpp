@@ -21,16 +21,7 @@ void String::deconstruct()
 {
     if (data != nullptr && data != &a_null_byte)
     {
-        if (allocation == 0)
-        {
-            cerr << "FAILURE" << endl;
-            cerr << allocation << endl;
-            cerr << length << endl;
-            cerr << data << endl;
-            cerr << static_cast<void*>(data) << endl;
-        }
-        //assert(allocation != 0);
-        cerr << "decrease by " << allocation << endl;
+        assert(allocation != 0);
         total_allocation -= allocation;
         delete[] data;
     }
@@ -46,7 +37,6 @@ void String::deconstruct()
 // allocates a new char * and keeps track of total_allocation
 char* String::allocate(int n)
 {
-    cerr << "increase by " << n << endl;
     total_allocation += n;
     char* new_data = new char[n];
     memset(new_data, '\0', n);
@@ -294,8 +284,6 @@ String& String::operator += (const String& rhs)
     resize(rhs.length);
     strcpy(data + length, rhs.data);
     length += rhs.length;
-    cerr << "+= string" << endl;
-    cerr << *this << endl;
     return *this;
 }
 
