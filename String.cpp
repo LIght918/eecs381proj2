@@ -77,11 +77,11 @@ String& String::copy(String& rhs)
 String& String::copy(const char* rhs)
 {
     deconstruct();
-    int cstrlength = strlen(cstr_);
+    int cstrlength = strlen(rhs);
     if (cstrlength > 0)
     {
         data = allocate(cstrlength + 1);
-        strcpy(data, cstr_);
+        strcpy(data, rhs);
         length = cstrlength;
         allocation = length + 1;
     }
