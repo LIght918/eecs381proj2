@@ -299,20 +299,6 @@ void String::swap(String& other) noexcept
     other.allocation = temp_alloc;
 }
 
-/* Monitoring functions - not part of a normal implementation */
-/*	used here for demonstration and testing purposes. */
-
-// Return the total number of Strings in existence
-static int String::get_number()
-{return number;}
-// Return total bytes allocated for all Strings in existence
-static int String::get_total_allocation()
-{return total_allocation;}
-// Call with true to cause ctor, assignment, and dtor messages to be output.
-// These messages are output from each function before it does anything else.
-static void String::set_messages_wanted(bool messages_wanted_)
-{messages_wanted = messages_wanted_;}
-
 // non-member overloaded operators
 
 // compare lhs and rhs strings; constructor will convert a C-string literal to a String.
