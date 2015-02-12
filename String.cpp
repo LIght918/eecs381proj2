@@ -96,7 +96,16 @@ String::String(const char* cstr_)
     {
         std::cout << "Ctor: \"" << cstr_ << "\"";
     }
-    copy(cstr_);
+    if (strlen(cstr_) == 0)
+    {
+        data = &a_null_byte;
+        allocation = 0;
+        length = 0;
+    }
+    else
+    {
+        copy(cstr_);
+    }
 }
 // The copy constructor initializes this String with the original's data,
 // and gets minimum allocation.
