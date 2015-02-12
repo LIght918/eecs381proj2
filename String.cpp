@@ -370,6 +370,7 @@ std::istream& operator>> (std::istream& is, String& str)
             if (!leading) trailing = true;
         }
     }
+    std::cerr << "escaped >>" << std::endl;
     is.unget();
     return is;
 }
@@ -383,11 +384,12 @@ std::istream& getline(std::istream& is, String& str)
     str.clear();
     while (true)
     {
-        char next = '\n';
-        if (!(is.get(next)) && !is.eof())
+        char next;
+        if (!(is.get(next)))
         {
             throw String_exception("getline failure");
         }
+        std::cerr << next;
         if (next != '\n')
         {
             str += next;

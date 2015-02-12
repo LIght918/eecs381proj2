@@ -48,5 +48,9 @@ String parse_title(String& title_string)
         title += substring;
         title += " ";
     }
+    if (title.size() == 0)
+    {
+        return String();
+    }
     return title.substring(0, title.size() - 1);
 }
