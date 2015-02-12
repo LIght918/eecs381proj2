@@ -56,8 +56,6 @@ Record::Record(std::ifstream &is)
     {
         throw_file_error();
     }
-    cout << "medium allocation is " << medium.get_allocation() << endl;
-    cout << "strlen(medium) is " << strlen(medium.c_str()) << endl;
     if (ID > ID_counter)
     {
         ID_counter = ID;
