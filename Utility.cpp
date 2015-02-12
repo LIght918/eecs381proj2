@@ -42,8 +42,7 @@ String title_read()
 String parse_title(String& title_string)
 {
     istringstream is(title_string.c_str());
-    String title;
-    String substring;
+    String title, substring;
     while(is >> substring)
     {
         title += substring;
@@ -51,8 +50,8 @@ String parse_title(String& title_string)
     }
     if (title.size() == 0)
     {
-        String empty;
-        return empty;
+        return String();
     }
-    return title.substring(0, title.size() - 1);
+    title.remove(title.size() - 1, 1);
+    return title;
 }
