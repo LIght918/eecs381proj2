@@ -73,7 +73,7 @@ String::String(const char* cstr_)
     number++;
     if (messages_wanted)
     {
-        cout << "\n" << "Ctor: \"" << cstr_ << "\"";
+        cout << "Ctor: \"" << cstr_ << "\"\n";
     }
     data = &a_null_byte;
     allocation = 0;
