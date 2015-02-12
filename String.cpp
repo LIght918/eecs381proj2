@@ -59,39 +59,31 @@ void String::resize(int n)
 // copies the rhs into this string
 String& String::copy(const String& rhs)
 {
-    deconstruct();
-    if (rhs.length > 0)
+    String temp();
+    if (rhs.allocation > 0)
     {
-        allocation = rhs.allocation;
-        data = allocate(allocation);
-        strcpy(data, rhs.data);
-        length = rhs.length;
+        temp.data = allocate(rhs.allocation);
+        memcpy(temp.data, rhs.data, rhs.allocation);
+        temp.allocation = rhs.allocation;
+        temp.length = rhs.length;
     }
-    else
-    {
-        length = 0;
-        allocation = 0;
-    }
+    swap(temp);
     return *this;
 }
 
 // copies the rhs into this string
 String& String::copy(const char* rhs)
 {
-    deconstruct();
+    String temp();
     int cstrlength = strlen(rhs);
     if (cstrlength > 0)
     {
-        data = allocate(cstrlength + 1);
-        strcpy(data, rhs);
-        length = cstrlength;
-        allocation = length + 1;
+        temp.data = allocate(cstrlength + 1);
+        strcpy(temp.data, rhs);
+        temp.length = cstrlength;
+        temp.allocation = length + 1;
     }
-    else
-    {
-        length = 0;
-        allocation = 0;
-    }
+    swap(temp);
     return *this;
 }
 
