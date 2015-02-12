@@ -266,6 +266,8 @@ String& String::operator += (const String& rhs)
     resize(rhs.length);
     strcpy(data + length, rhs.data);
     length += rhs.length;
+    cerr << "+= string" << endl;
+    cerr << *this << endl;
     return *this;
 }
 
