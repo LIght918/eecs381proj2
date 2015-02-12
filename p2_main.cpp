@@ -39,7 +39,6 @@ int main()
     Ordered_list<Collection*, Less_than_ptr<Collection*>> catalog;
     Ordered_list<Record*, Less_than_ptr<Record*>> library_title;
     Ordered_list<Record*, record_id_comp> library_id;
-    String::set_messages_wanted(true);
     while (true)
     {
         try
