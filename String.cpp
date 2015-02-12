@@ -15,7 +15,7 @@ int String::total_allocation = 0;	// counts total amount of memory allocated
 bool String::messages_wanted = false;	// whether to output constructor/destructor/operator= messages, initially false
 
 // deallocates data
-void deconstruct()
+void String::deconstruct()
 {
     total_allocation -= allocation;
     if (data != nullptr && data != a_null_byte)
@@ -26,14 +26,14 @@ void deconstruct()
 }
 
 // allocates a new char * and keeps track of total_allocation
-char* allocate(int n)
+char* String::allocate(int n)
 {
     total_allocation += n + 1;
     return new char[n + 1];
 }
 
 // resizes the string to handle if the length was increased by n characters
-void resize(int n)
+void String::resize(int n)
 {
     assert(n > 0);
     if (allocation == 0)
@@ -55,7 +55,7 @@ void resize(int n)
 }
 
 // copies the rhs into this string
-String& copy(String& rhs)
+String& String::copy(String& rhs)
 {
     deconstruct();
     if (original.length > 0)
@@ -74,7 +74,7 @@ String& copy(String& rhs)
 }
 
 // copies the rhs into this string
-String& copy(const char* rhs)
+String& String::copy(const char* rhs)
 {
     deconstruct();
     int cstrlength = strlen(cstr_);
@@ -94,7 +94,7 @@ String& copy(const char* rhs)
 }
 
 // moves rhs into this string
-String& move(const char* rhs)
+String& String::move(const char* rhs)
 {
     deconstruct();
     data = rhs;
@@ -104,7 +104,7 @@ String& move(const char* rhs)
 }
 
 // moves rhs into this string
-String& move(String&& rhs)
+String& String::move(String&& rhs)
 {
     swap(rhs);
     return *this;
@@ -195,7 +195,7 @@ int String::get_allocation() const
 {return allocation;}
 
 // checks the subscript i and throws errors if i is out of bounds
-void check_subscript(int i)
+void String::check_subscript(int i)
 {
     if (i < 0 || i >= length)
     {
