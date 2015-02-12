@@ -453,7 +453,7 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
         last = new_node;
         return;
     }
-    else if (ordering_f(new_datum, node->datum) <= 0)
+    else if (ordering_f(new_datum, node->datum))
     {
         Node *new_node = new Node(new_datum, nullptr, first);
         first = new_node;
@@ -463,7 +463,7 @@ void Ordered_list<T, OF>::insert(T&& new_datum)
     node = node->next;
     while (node != nullptr)
     {
-        if (ordering_f(new_datum, node->datum) <= 0)
+        if (ordering_f(new_datum, node->datum))
         {
             Node *new_node = new Node(new_datum, node->prev, node);
             node->prev = new_node;
