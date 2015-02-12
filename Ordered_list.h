@@ -430,16 +430,10 @@ Ordered_list<T, OF>::~Ordered_list<T, OF>()
 template<typename T, typename OF>
 void Ordered_list<T, OF>::clear() noexcept
 {
-    Node *node = first;
-    while (node != nullptr)
+    while (length > 0)
     {
-        Node *next = node->next;
-        delete node;
-        node = next;
+        erase(begin());
     }
-    length = 0;
-    first = nullptr;
-    last = nullptr;
 }
 
 template<typename T, typename OF>
