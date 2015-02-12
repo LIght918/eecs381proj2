@@ -57,7 +57,7 @@ String parse_title(String& title_string)
             }
         }
     }
-    if (isspace(title[title.size() - 1]))
+    if (title.size() > 0 && isspace(title[title.size() - 1]))
     {
         title.remove(title.size() - 1, 1);
     }
