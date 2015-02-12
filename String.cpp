@@ -349,7 +349,7 @@ str is expanded as needed, and retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
 std::istream& operator>> (std::istream& is, String& str)
 {
-    clear(str);
+    str.clear();
     bool leading = true;
     bool trailing = false;
     while (leading || !trailing)
@@ -384,7 +384,7 @@ str's allocation is expanded as needed, and it retains the final allocation.
 If the input stream fails, str contains whatever characters were read. */
 std::istream& getline(std::istream& is, String& str)
 {
-    clear(str);
+    str.clear();
     while (true)
     {
         char next;
