@@ -185,7 +185,7 @@ int main()
                         case 'm': /* add record to collection */
                         {
                             Collection *collection_ptr = read_name_get_collection(catalog);
-                            Record *record_ptr = read_title_get_record(library_title);
+                            Record *record_ptr = read_id_get_record(library_title);
                             collection_ptr->add_member(record_ptr);
                             cout << "Member " << record_ptr->get_ID() << " " << record_ptr->get_title() << " added";
                             break;
