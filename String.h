@@ -171,8 +171,6 @@ private:
 
     String& copy(String& rhs); // copies the rhs into this string
     String& copy(const char* rhs); // copies rhs into this string
-    String& move(const char* rhs); // moves rhs into this string
-    String& move(String&& rhs); // moves rhs into this string
 	
 	static char a_null_byte;	// to hold a null byte for empty string representation
 

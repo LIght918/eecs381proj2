@@ -93,23 +93,6 @@ String& String::copy(const char* rhs)
     return *this;
 }
 
-// moves rhs into this string
-String& String::move(const char* rhs)
-{
-    deconstruct();
-    data = rhs;
-    length = strlen(rhs);
-    allocation = length + 1;
-    return *this;
-}
-
-// moves rhs into this string
-String& String::move(String&& rhs)
-{
-    swap(rhs);
-    return *this;
-}
-
 // Default initialization is to contain an empty string with no allocation.
 // If a non-empty C-string is supplied, this String gets minimum allocation.
 String::String(const char* cstr_ = "")
@@ -141,7 +124,7 @@ String::String(String&& original) noexcept
     {
         cout << "Move ctor: \"" + original + "\"";
     }
-    move(original);
+    swap(original);
 }
 // deallocate C-string memory
 ~String::String() noexcept
@@ -169,7 +152,8 @@ String& String::operator= (const char* rhs)
     {
         cout << "Assign from C-string:  \"" + rhs + "\"";
     }
-    move(rhs);
+    String temp(rhs);
+    swap(temp);
     return *this;
 }
 // Move assignment - simply swaps contents with rhs without any copying
@@ -179,7 +163,7 @@ String& String::operator= (String&& rhs) noexcept
     {
         cout << "Move assign from String:  \"" + rhs + "\"";
     }
-    move(rhs);
+    swap(rhs);
     return *this;
 }
 
@@ -237,7 +221,7 @@ String String::substring(int i, int len) const
 // Set to an empty string with minimum allocation by create/swap with an empty string.
 void String::clear()
 {
-    move("");
+    copy("");
 }
 
 /* Remove the len characters starting at i; allocation is unchanged.
