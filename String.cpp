@@ -135,9 +135,8 @@ String& String::operator= (const String& rhs)
     String temp;
     if (rhs.allocation > 0)
     {
-        char *new_data = allocate(rhs.allocation);
-        temp.data = new_data;
-        strcpy(new_data, rhs.data);
+        temp.data = allocate(rhs.allocation);
+        strcpy(temp.data, rhs.data);
         temp.allocation = rhs.allocation;
         temp.length = rhs.length;
     }
