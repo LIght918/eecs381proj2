@@ -139,7 +139,7 @@ int main()
                             Record *record_ptr = read_id_get_record(library_id);
                             int rating = integer_read();
                             record_ptr->set_rating(rating);
-                            cout << "Rating for record " <<  " changed to " << rating;
+                            cout << "Rating for record " << record_ptr->get_ID() << " changed to " << rating;
                             break;
                         }
                         default:
