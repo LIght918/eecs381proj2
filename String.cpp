@@ -29,7 +29,9 @@ void String::deconstruct()
 char* String::allocate(int n)
 {
     total_allocation += n;
-    return new char[n];
+    char* new_data = new char[n];
+    std::cerr << new_data << std::endl;
+    return new_data;
 }
 
 // resizes the string to handle if the length was increased by n characters
@@ -40,6 +42,7 @@ void String::resize(int n)
     {
         allocation = n + 1;
         data = allocate(allocation);
+        std::cerr << data << std::endl;
         length = 0;
         return;
     }
@@ -271,8 +274,7 @@ String& String::operator += (char rhs)
     }
     std::cerr << strlen(data) << std::endl;
     resize(1);
-    data[length] = rhs;
-    length += 1;
+    data[length++] = rhs;
     std::cerr << allocation << std::endl;
     std::cerr << length << std::endl;
     for (int i = 0; i < allocation; i++)
