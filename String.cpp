@@ -95,7 +95,7 @@ String& String::copy(const char* rhs)
 
 // Default initialization is to contain an empty string with no allocation.
 // If a non-empty C-string is supplied, this String gets minimum allocation.
-String::String(const char* cstr_ = "")
+String::String(const char* cstr_)
 {
     number++;
     if (messages_wanted)
