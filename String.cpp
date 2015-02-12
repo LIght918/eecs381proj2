@@ -365,13 +365,9 @@ std::istream& operator>> (std::istream& is, String& str)
             leading = false;
             trailing = false;
         }
-        else if (!leading)
-        {
-            trailing = true;
-        }
         else
         {
-            leading = false;
+            if (!leading) trailing = true;
         }
     }
     is.unget();
