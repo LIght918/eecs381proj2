@@ -213,7 +213,7 @@ int main()
                             Record *record_ptr = *record_iter;
                             library_title.erase(record_iter);
                             library_id.erase(library_id.find(record_ptr));
-                            cout << "Record " << record_ptr << " deleted";
+                            cout << "Record " << record_ptr->get_ID() << " deleted";
                             delete record_ptr;
                             break;
                         }
@@ -231,7 +231,7 @@ int main()
                             Collection *collection_ptr = read_name_get_collection(catalog);
                             Record *record_ptr = read_title_get_record(library_title);
                             collection_ptr->remove_member(record_ptr);
-                            cout << "Member " <<record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted";
+                            cout << "Member " << record_ptr->get_ID() << " " << record_ptr->get_title() << " deleted";
                             break;
                         }
                         default:

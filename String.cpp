@@ -55,7 +55,6 @@ void String::resize(int n)
         return;
     }
     assert(allocation > 0);
-    cout << "data is " << data << endl;
     if (allocation < length + n + 1)
     {
         int new_alloc = 2 * (length + n + 1);
@@ -67,7 +66,6 @@ void String::resize(int n)
         allocation = new_alloc;
         length = old_length;
     }
-    cout << "data is now " << data << endl;
 }
 
 // copies the rhs into this string
