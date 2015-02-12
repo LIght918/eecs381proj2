@@ -18,6 +18,7 @@ Record::Record(const String &medium_, const String &title_)
     title = title_;
     medium = medium_;
     ID = ++ID_counter;
+    rating = 0;
 }
 
 // Create a Record object suitable for use as a probe containing the supplied
@@ -25,6 +26,7 @@ Record::Record(const String &medium_, const String &title_)
 Record::Record(const String &title_)
 {
     title = title_;
+    rating = 0;
     ID = 0;
 }
 
@@ -34,6 +36,7 @@ Record::Record(const String &title_)
 Record::Record(int ID_)
 {
     ID = ID_;
+    rating = 0;
 }
 
 // Construct a Record object from a file stream in save format.

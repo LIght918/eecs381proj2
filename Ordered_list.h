@@ -482,7 +482,7 @@ typename Ordered_list<T, OF>::Iterator Ordered_list<T, OF>::find(const T& probe_
     Node *node = first;
     while (node != nullptr)
     {
-        if (ordering_f(node->datum, probe_datum) == 0)
+        if (!ordering_f(node->datum, probe_datum) && !ordering_f(probe_datum, node->datum))
         {
             return Iterator(node);
         }
