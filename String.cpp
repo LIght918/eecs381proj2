@@ -203,9 +203,10 @@ String String::substring(int i, int len) const
     {
         throw String_exception("Substring bounds invalid");
     }
-    char sub[len + 1];
-    strcpy(sub, data + i);
-    return String(sub);
+    String result(*this);
+    result.remove(0, i);
+    result.remove(len, length - len);
+    return result;
 }
 
 // Modifiers
@@ -224,9 +225,8 @@ void String::remove(int i, int len)
     {
         throw String_exception("Remove bounds invalid");
     }
-    char* new_data = new char[length - len];
-    strncpy(new_data, data, i);
-    strcpy(new_data + i, data + i + len);
+    strcpy(data + i, data + i + len);
+    length -= len;
 }
 
 /* Insert the supplied source String before character i of this String,
@@ -249,7 +249,7 @@ void String::insert_before(int i, const String& src)
         return;
     }
     resize(src.length);
-    memmove(data + i + src.length, length - i);
+    memmove(data + i + src.length, data + i, length - i);
     strcpy(data + i, src.data, src.length);
     length += src.length;
 }
