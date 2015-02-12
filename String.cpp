@@ -213,8 +213,7 @@ String String::substring(int i, int len) const
 // Set to an empty string with minimum allocation by create/swap with an empty string.
 void String::clear()
 {
-    String empty();
-    swap(&empty);
+    *this = String();
 }
 
 /* Remove the len characters starting at i; allocation is unchanged.
