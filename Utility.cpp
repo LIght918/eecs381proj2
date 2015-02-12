@@ -45,6 +45,14 @@ String parse_title(String& title_string)
     String title(title_string);
     for (int i = 0; i < title.size(); i++)
     {
+        if (!isspace(title[i]))
+        {
+            title.remove(0, i);
+            break;
+        }
+    }
+    for (int i = 0; i < title.size(); i++)
+    {
         if (isspace(title[i]))
         {
             int j;
