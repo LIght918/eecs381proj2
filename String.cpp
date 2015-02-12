@@ -21,7 +21,7 @@ void String::deconstruct()
 {
     cerr << "deallocating " << allocation << endl;
     cerr << "data (" << static_cast<void*>(data) << ") is ";
-    if (data == &a_null_byte)
+    if (data == &a_null_byte || data == nullptr)
     {
         cerr << "null" << endl;
     }
