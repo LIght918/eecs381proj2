@@ -406,6 +406,10 @@ Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
 template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list(Ordered_list<T, OF>&& original) noexcept
 {
+    length = 0;
+    first = nullptr;
+    last = nullptr;
+    g_Ordered_list_count++;
     swap(original);
     g_Ordered_list_count++;
 }
