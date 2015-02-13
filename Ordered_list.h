@@ -386,9 +386,9 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
             temp.length++;
             clone_node->next = new_node;
             clone_node = new_node;
+            temp.last = clone_node;
             node = node->next;
         }
-        temp.last = clone_node;
     }
     swap(temp);
     return *this;
