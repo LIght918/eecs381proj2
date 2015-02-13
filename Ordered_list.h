@@ -378,7 +378,9 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
     if (original.length > 0)
     {
         Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
+        temp.length++;
         temp.first = clone_node;
+        temp.last = clone_node;
         Node *node = original.first->next;
         while (node != nullptr)
         {
