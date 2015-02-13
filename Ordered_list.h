@@ -440,7 +440,37 @@ void Ordered_list<T, OF>::clear() noexcept
 template<typename T, typename OF>
 void Ordered_list<T, OF>::insert(const T& new_datum)
 {
-    insert(std::move(new_datum));
+    length++;
+    Node *node = first;
+    if (node == nullptr)
+    {
+        Node *new_node = new Node(new_datum, nullptr, nullptr);
+        first = new_node;
+        last = new_node;
+        return;
+    }
+    else if (ordering_f(new_datum, node->datum))
+    {
+        Node *new_node = new Node(new_datum, nullptr, first);
+        first = new_node;
+        node->prev = new_node;
+        return;
+    }
+    node = node->next;
+    while (node != nullptr)
+    {
+        if (ordering_f(new_datum, node->datum))
+        {
+            Node *new_node = new Node(new_datum, node->prev, node);
+            if (node->prev != nullptr) node->prev->next = new_node;
+            node->prev = new_node;
+            return;
+        }
+        node = node->next;
+    }
+    Node *new_node = new Node(new_datum, last, nullptr);
+    last->next = new_node;
+    last = new_node;
 }
 
 template<typename T, typename OF>
