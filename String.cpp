@@ -35,7 +35,7 @@ void String::deconstruct()
 }
 
 // allocates a new char * and keeps track of total_allocation
-char* String::allocate(const int n)
+char* String::allocate(int n)
 {
     total_allocation += n;
     char* new_data = new char[n];
@@ -201,7 +201,7 @@ String String::substring(int i, int len) const
     }
     String result;
     result.allocation = len + 1;
-    result.data = allocate(result.allocation);
+    result.data = result.allocate(result.allocation);
     strncpy(result.data, data + i, len);
     result.length = len;
     return result;
