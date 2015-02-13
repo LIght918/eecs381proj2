@@ -399,6 +399,9 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
 template<typename T, typename OF>
 Ordered_list<T, OF>::Ordered_list(const Ordered_list<T, OF>& original)
 {
+    length = 0;
+    first = nullptr;
+    last = nullptr;
     copy(original);
     g_Ordered_list_count++;
 }
