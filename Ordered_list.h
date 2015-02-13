@@ -379,13 +379,13 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
         Ordered_list<T, OF> temp;
         if (original.length > 0)
         {
-            temp.length = original.length;
             Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
             temp.first = clone_node;
             Node *node = original.first->next;
             while (node != nullptr)
             {
                 Node *new_node = new Node(node->datum, clone_node, nullptr);
+                temp.length++;
                 clone_node->next = new_node;
                 clone_node = new_node;
                 node = node->next;
