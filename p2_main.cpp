@@ -296,7 +296,7 @@ int main()
                             ofstream file(filename.c_str());
                             if (!file)
                             {
-                                throw_file_error();
+                                throw Error("Could not open file!");
                             }
                             file << library_title.size() << "\n";
                             for (auto&& record : library_title)
