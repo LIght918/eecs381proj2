@@ -306,7 +306,7 @@ private:
     Node *first;
     Node *last;
 
-    Ordered_list& copy(const Ordered_list& original) noexcept;
+    Ordered_list& copy(const Ordered_list& original);
     void insert_node(Node* new_node);
 };
 
@@ -372,30 +372,23 @@ Ordered_list<T, OF>::Ordered_list()
 }
 
 template<typename T, typename OF>
-Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& original) noexcept
+Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& original)
 {
     Ordered_list<T, OF> temp;
-    try
+    if (original.length > 0)
     {
-        if (original.length > 0)
+        Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
+        temp.first = clone_node;
+        Node *node = original.first->next;
+        while (node != nullptr)
         {
-            Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
-            temp.first = clone_node;
-            Node *node = original.first->next;
-            while (node != nullptr)
-            {
-                Node *new_node = new Node(node->datum, clone_node, nullptr);
-                temp.length++;
-                clone_node->next = new_node;
-                clone_node = new_node;
-                node = node->next;
-            }
-            temp.last = clone_node;
+            Node *new_node = new Node(node->datum, clone_node, nullptr);
+            temp.length++;
+            clone_node->next = new_node;
+            clone_node = new_node;
+            node = node->next;
         }
-    }
-    catch(...)
-    {
-        temp.clear();
+        temp.last = clone_node;
     }
     swap(temp);
     return *this;
