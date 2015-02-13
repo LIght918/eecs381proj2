@@ -440,7 +440,7 @@ void Ordered_list<T, OF>::clear() noexcept
 template<typename T, typename OF>
 void Ordered_list<T, OF>::insert(const T& new_datum)
 {
-    T data = new_datum;
+    T data(new_datum);
     insert(std::move(data));
 }
 
