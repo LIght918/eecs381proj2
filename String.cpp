@@ -93,7 +93,7 @@ String::String(const String& original)
     {
         cout << "Copy ctor: \"" << original << "\"\n";
     }
-    allocation = original.allocation;
+    allocation = original.length + 1;
     data = allocate(allocation);
     strcpy(data, original.data);
     length = original.length;
