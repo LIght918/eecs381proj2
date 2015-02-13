@@ -374,9 +374,9 @@ Ordered_list<T, OF>::Ordered_list()
 template<typename T, typename OF>
 Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& original) noexcept
 {
+    Ordered_list<T, OF> temp;
     try
     {
-        Ordered_list<T, OF> temp;
         if (original.length > 0)
         {
             Node *clone_node = new Node(original.first->datum, nullptr, nullptr);
@@ -392,13 +392,12 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
             }
             temp.last = clone_node;
         }
-        swap(temp);
     }
     catch(...)
     {
-        // don't do anything
-        // the destructor does the work for you
+        temp.clear();
     }
+    swap(temp);
     return *this;
 }
 
