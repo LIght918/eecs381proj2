@@ -330,7 +330,7 @@ int main()
                             ifstream file(filename.c_str());
                             if (!file)
                             {
-                                throw_file_error();
+                                throw Error("Could not open file!");
                             }
                             int num;
                             file >> num;
