@@ -496,7 +496,7 @@ void Ordered_list<T, OF>::insert(const T& new_datum)
 template<typename T, typename OF>
 void Ordered_list<T, OF>::insert(T&& new_datum)
 {
-    insert_node(new Node(new_datum, nullptr, nullptr));
+    insert_node(new Node(std::move(new_datum), nullptr, nullptr));
     length++;
 }
 
