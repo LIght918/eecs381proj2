@@ -35,7 +35,7 @@ void String::deconstruct()
 }
 
 // allocates a new char * and keeps track of total_allocation
-char* String::allocate(int n)
+char* String::allocate(const int n)
 {
     total_allocation += n;
     char* new_data = new char[n];
