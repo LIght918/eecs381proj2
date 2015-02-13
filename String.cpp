@@ -199,7 +199,7 @@ String String::substring(int i, int len) const
     }
     String result(*this);
     result.remove(0, i);
-    result.remove(len, length - len);
+    result.remove(len, result.size() - len);
     return result;
 }
 
