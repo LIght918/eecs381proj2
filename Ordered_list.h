@@ -307,6 +307,7 @@ private:
     Node *last;
 
     Ordered_list& copy(const Ordered_list& original) noexcept;
+    void insert_node(Node* new_node);
 };
 
 // These function templates are given two iterators, usually .begin() and .end(),
@@ -438,19 +439,21 @@ void Ordered_list<T, OF>::clear() noexcept
 }
 
 template<typename T, typename OF>
-void Ordered_list<T, OF>::insert(const T& new_datum)
+void Ordered_list<T, OF>::insert_node(Node *new_node)
 {
     Node *node = first;
     if (node == nullptr)
     {
-        Node *new_node = new Node(new_datum, nullptr, nullptr);
+        new_node->prev = nullptr;
+        new_node->next = nullptr;
         first = new_node;
         last = new_node;
         return;
     }
-    else if (ordering_f(new_datum, node->datum))
+    else if (ordering_f(new_node->datum, node->datum))
     {
-        Node *new_node = new Node(new_datum, nullptr, first);
+        new_node->prev = nullptr;
+        new_node->next = first;
         first = new_node;
         node->prev = new_node;
         return;
@@ -458,54 +461,33 @@ void Ordered_list<T, OF>::insert(const T& new_datum)
     node = node->next;
     while (node != nullptr)
     {
-        if (ordering_f(new_datum, node->datum))
+        if (ordering_f(new_node->datum, node->datum))
         {
-            Node *new_node = new Node(new_datum, node->prev, node);
+            new_node->prev = node->prev;
+            new_node->next = node;
             if (node->prev != nullptr) node->prev->next = new_node;
             node->prev = new_node;
             return;
         }
         node = node->next;
     }
-    Node *new_node = new Node(new_datum, last, nullptr);
+    new_node->prev = last;
+    new_node->next = nullptr;
     last->next = new_node;
     last = new_node;
+}
+
+template<typename T, typename OF>
+void Ordered_list<T, OF>::insert(const T& new_datum)
+{
+    insert_node(new Node(new_datum, nullptr, nullptr));
     length++;
 }
 
 template<typename T, typename OF>
 void Ordered_list<T, OF>::insert(T&& new_datum)
 {
-    Node *node = first;
-    if (node == nullptr)
-    {
-        Node *new_node = new Node(new_datum, nullptr, nullptr);
-        first = new_node;
-        last = new_node;
-        return;
-    }
-    else if (ordering_f(new_datum, node->datum))
-    {
-        Node *new_node = new Node(new_datum, nullptr, first);
-        first = new_node;
-        node->prev = new_node;
-        return;
-    }
-    node = node->next;
-    while (node != nullptr)
-    {
-        if (ordering_f(new_datum, node->datum))
-        {
-            Node *new_node = new Node(new_datum, node->prev, node);
-            if (node->prev != nullptr) node->prev->next = new_node;
-            node->prev = new_node;
-            return;
-        }
-        node = node->next;
-    }
-    Node *new_node = new Node(new_datum, last, nullptr);
-    last->next = new_node;
-    last = new_node;
+    insert_node(new Node(new_datum, nullptr, nullptr));
     length++;
 }
 
