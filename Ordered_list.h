@@ -394,6 +394,11 @@ Ordered_list<T, OF>& Ordered_list<T,OF>::copy(const Ordered_list<T, OF>& origina
         }
         swap(temp);
     }
+    catch(...)
+    {
+        // don't do anything
+        // the destructor does the work for you
+    }
     return *this;
 }
 
