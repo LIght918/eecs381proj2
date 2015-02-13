@@ -93,8 +93,10 @@ String::String(const String& original)
     {
         cout << "Copy ctor: \"" << original << "\"\n";
     }
-    String temp(original.data);
-    swap(temp);
+    allocation = original.allocation;
+    data = allocate(allocation);
+    strcpy(data, original.data);
+    length = original.length;
 }
 // Move constructor - take original's data, and set the original String
 // member variables to the empty state (do not initialize "this" String and swap).
