@@ -54,7 +54,6 @@ int main()
             {
                 throw_unrecognized_command();
             }
-            cerr << action << "\t" << object << endl;
             switch (action)
             {
                 case 'f': /* find (records only) */
@@ -309,7 +308,6 @@ int main()
                             {
                                 (*catalog_iter)->save(file);
                             }
-                            file.close();
                             cout << "Data saved\n";
                             break;
                         }
@@ -412,6 +410,7 @@ int main()
         } catch (Error& e)
         {
             cout << e.msg << "\n";
+            cin.clear();
             cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         } catch (String_exception& e)
         {
