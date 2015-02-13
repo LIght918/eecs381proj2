@@ -199,9 +199,11 @@ String String::substring(int i, int len) const
     {
         throw String_exception("Substring bounds invalid");
     }
-    String result(*this);
-    result.remove(0, i);
-    result.remove(len, result.size() - len);
+    String result;
+    result.allocation = len + 1;
+    result.data = allocate(result.allocation);
+    strncpy(result.data, data + i, len);
+    result.length = len;
     return result;
 }
 
